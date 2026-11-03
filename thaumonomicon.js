@@ -122,6 +122,8 @@
     els.btnZoomIn = document.getElementById("btn-zoom-in");
     els.btnZoomFit = document.getElementById("btn-zoom-fit");
     els.btnCenterTarget = document.getElementById("btn-center-target");
+    els.btnSavePng = document.getElementById("btn-save-png");
+    els.btnCopyPng = document.getElementById("btn-copy-png");
     els.zoomLevelReadout = document.getElementById("zoom-level-readout");
 
     els.viewport = document.getElementById("tree-viewport");
@@ -995,6 +997,13 @@
    * 2D Panning & Zooming Mechanics (scrollLeft / scrollTop + zoom scale)
    * ========================================================================== */
 
+  function formatZoomPercentage(scale) {
+    const pct = scale * 100;
+    if (pct < 1) return `${pct.toFixed(2)}%`;
+    if (pct < 10) return `${pct.toFixed(1)}%`;
+    return `${Math.round(pct)}%`;
+  }
+
   function applySurfaceDimensions() {
     const sg = currentSubgraph;
     if (!sg) return;
@@ -1010,12 +1019,12 @@
     els.nodesLayer.style.transform = `scale(${zoomScale})`;
     els.nodesLayer.style.transformOrigin = "0 0";
 
-    els.zoomLevelReadout.textContent = `${Math.round(zoomScale * 100)}%`;
+    els.zoomLevelReadout.textContent = formatZoomPercentage(zoomScale);
   }
 
   function setZoom(newScale, focalClientX, focalClientY) {
-    const clamped = Math.min(2.0, Math.max(0.22, newScale));
-    if (Math.abs(clamped - zoomScale) < 0.001) return;
+    const clamped = Math.min(4.0, Math.max(0.005, newScale));
+    if (Math.abs(clamped - zoomScale) < 0.0001) return;
 
     const vp = els.viewport;
     const rect = vp.getBoundingClientRect();
@@ -1066,7 +1075,7 @@
     const vp = els.viewport;
     const scaleX = vp.clientWidth / boxW;
     const scaleY = vp.clientHeight / boxH;
-    zoomScale = Math.min(1.15, Math.max(0.25, Math.min(scaleX, scaleY)));
+    zoomScale = Math.min(1.15, Math.max(0.005, Math.min(scaleX, scaleY)));
 
     applySurfaceDimensions();
 
@@ -1074,6 +1083,313 @@
     const centerY = ((minY + maxY) / 2) * zoomScale;
     vp.scrollLeft = Math.max(0, centerX - vp.clientWidth / 2);
     vp.scrollTop = Math.max(0, centerY - vp.clientHeight / 2);
+  }
+
+  /* ==========================================================================
+   * Full-Graph Screenshot Renderer (at Current Zoom Level)
+   * ========================================================================== */
+
+  function drawRoundedRect(ctx, x, y, w, h, r) {
+    const radius = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.arcTo(x + w, y, x + w, y + h, radius);
+    ctx.arcTo(x + w, y + h, x, y + h, radius);
+    ctx.arcTo(x, y + h, x, y, radius);
+    ctx.arcTo(x, y, x + w, y, radius);
+    ctx.closePath();
+  }
+
+  function truncateCanvasText(ctx, text, maxWidth) {
+    if (!text) return "";
+    if (ctx.measureText(text).width <= maxWidth) return text;
+    let lo = 0;
+    let hi = text.length;
+    while (lo < hi) {
+      const mid = Math.ceil((lo + hi) / 2);
+      if (ctx.measureText(text.slice(0, mid) + "…").width <= maxWidth) {
+        lo = mid;
+      } else {
+        hi = mid - 1;
+      }
+    }
+    return text.slice(0, lo) + "…";
+  }
+
+  async function renderFullGraphBlob() {
+    const sg = currentSubgraph;
+    if (!sg || sg.positions.size === 0) return null;
+
+    let minX = Infinity,
+      minY = Infinity,
+      maxX = -Infinity,
+      maxY = -Infinity;
+    for (const pos of sg.positions.values()) {
+      minX = Math.min(minX, pos.x);
+      minY = Math.min(minY, pos.y);
+      maxX = Math.max(maxX, pos.x + NODE_W);
+      maxY = Math.max(maxY, pos.y + NODE_H);
+    }
+
+    const pad = 48;
+    const unscaledW = maxX - minX + pad * 2;
+    const unscaledH = maxY - minY + pad * 2;
+    const offsetX = pad - minX;
+    const offsetY = pad - minY;
+
+    // Render at current zoomScale, capped only by browser canvas pixel limits (~16384px)
+    const MAX_CANVAS_DIM = 16000;
+    const maxAllowedScale = Math.min(
+      MAX_CANVAS_DIM / unscaledW,
+      MAX_CANVAS_DIM / unscaledH
+    );
+    const scale = Math.min(zoomScale, maxAllowedScale);
+
+    const width = Math.max(1, Math.round(unscaledW * scale));
+    const height = Math.max(1, Math.round(unscaledH * scale));
+
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+
+    // 1. Background fill & subtle dot grid
+    ctx.fillStyle = "#0b0914";
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.save();
+    ctx.scale(scale, scale);
+
+    if (scale >= 0.25) {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
+      const step = 24;
+      for (let gx = 12; gx < unscaledW; gx += step) {
+        for (let gy = 12; gy < unscaledH; gy += step) {
+          ctx.fillRect(gx, gy, 1.2, 1.2);
+        }
+      }
+    }
+
+    // 2. Render Bezier Edges & Arrowheads
+    for (const edge of sg.edges) {
+      const pFrom = sg.positions.get(edge.from);
+      const pTo = sg.positions.get(edge.to);
+      if (!pFrom || !pTo) continue;
+
+      const fx = pFrom.x + offsetX;
+      const fy = pFrom.y + offsetY;
+      const tx = pTo.x + offsetX;
+      const ty = pTo.y + offsetY;
+
+      let x1, y1, cp1x, cp1y, cp2x, cp2y, x2, y2;
+      if (layoutDir === "TB") {
+        x1 = fx + NODE_W / 2;
+        y1 = fy + NODE_H;
+        x2 = tx + NODE_W / 2;
+        y2 = ty;
+        const dy = Math.max(36, Math.abs(y2 - y1) * 0.5);
+        cp1x = x1;
+        cp1y = y1 + dy;
+        cp2x = x2;
+        cp2y = y2 - dy;
+      } else {
+        x1 = fx + NODE_W;
+        y1 = fy + NODE_H / 2;
+        x2 = tx;
+        y2 = ty + NODE_H / 2;
+        const dx = Math.max(40, Math.abs(x2 - x1) * 0.5);
+        cp1x = x1 + dx;
+        cp1y = y1;
+        cp2x = x2 - dx;
+        cp2y = y2;
+      }
+
+      let color = "#7c3aed";
+      if (edge.isUnlockEdge) color = "#0ea5e9";
+      else if (edge.type === "Ph") color = "#38bdf8";
+
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = edge.type === "Ph" ? 0.85 : 0.78;
+      if (edge.type === "Ph" && !edge.isUnlockEdge) {
+        ctx.setLineDash([6, 4]);
+      }
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x2, y2);
+      ctx.stroke();
+
+      // Arrowhead at (x2, y2) along tangent from cp2 -> p2
+      ctx.setLineDash([]);
+      const angle = Math.atan2(y2 - cp2y, x2 - cp2x);
+      const headLen = 8;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(x2, y2);
+      ctx.lineTo(
+        x2 - headLen * Math.cos(angle - Math.PI / 6),
+        y2 - headLen * Math.sin(angle - Math.PI / 6)
+      );
+      ctx.lineTo(
+        x2 - headLen * Math.cos(angle + Math.PI / 6),
+        y2 - headLen * Math.sin(angle + Math.PI / 6)
+      );
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // 3. Render Node Cards
+    for (const item of sg.nodes) {
+      const r = item.research;
+      const pos = sg.positions.get(r.key);
+      if (!pos) continue;
+
+      const nx = pos.x + offsetX;
+      const ny = pos.y + offsetY;
+      const isDone = completedKeys.has(r.key);
+
+      ctx.save();
+      if (isDone) ctx.globalAlpha = 0.52;
+
+      // Card fill & border
+      let bgFill = "#1b1630";
+      let borderStroke = "#3b3066";
+      let borderWidth = 1.5;
+
+      if (item.isTarget) {
+        bgFill = "#331c19";
+        borderStroke = "#f59e0b";
+        borderWidth = 2.5;
+      } else if (item.isUnlock) {
+        bgFill = "#12273d";
+        borderStroke = "#38bdf8";
+      } else if (item.isRoot) {
+        bgFill = "#102b2a";
+        borderStroke = "#10b981";
+      }
+
+      drawRoundedRect(ctx, nx, ny, NODE_W, NODE_H, 8);
+      ctx.fillStyle = bgFill;
+      ctx.fill();
+      ctx.lineWidth = borderWidth;
+      ctx.strokeStyle = borderStroke;
+      if (isDone) ctx.setLineDash([5, 3]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Top bar: Tab tag
+      ctx.font = "600 9.5px Inter, sans-serif";
+      const tabText = truncateCanvasText(ctx, r.tab, 130);
+      const tabW = ctx.measureText(tabText).width + 10;
+      drawRoundedRect(ctx, nx + 9, ny + 8, tabW, 15, 4);
+      ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.fill();
+      ctx.fillStyle = "#b5aed4";
+      ctx.textBaseline = "middle";
+      ctx.fillText(tabText, nx + 14, ny + 15.5);
+
+      // Warp / Scan badges on top-right
+      let rightCursor = nx + NODE_W - 9;
+      if (r.scans && r.scans.length > 0) {
+        const sText = "Scan";
+        const sw = ctx.measureText(sText).width + 8;
+        rightCursor -= sw;
+        drawRoundedRect(ctx, rightCursor, ny + 8, sw, 15, 4);
+        ctx.fillStyle = "rgba(16, 185, 129, 0.22)";
+        ctx.fill();
+        ctx.fillStyle = "#6ee7b7";
+        ctx.fillText(sText, rightCursor + 4, ny + 15.5);
+        rightCursor -= 4;
+      }
+      if (r.warp > 0) {
+        const wText = `W:${r.warp}`;
+        const ww = ctx.measureText(wText).width + 8;
+        rightCursor -= ww;
+        drawRoundedRect(ctx, rightCursor, ny + 8, ww, 15, 4);
+        ctx.fillStyle = "rgba(244, 63, 94, 0.24)";
+        ctx.fill();
+        ctx.fillStyle = "#fda4af";
+        ctx.fillText(wText, rightCursor + 4, ny + 15.5);
+      }
+
+      // Research Name
+      ctx.font = "700 11.5px Inter, sans-serif";
+      ctx.fillStyle = "#f1effa";
+      const nameText = truncateCanvasText(ctx, r.name, NODE_W - 18);
+      ctx.fillText(nameText, nx + 9, ny + 41);
+
+      // Bottom bar: Key & Vis cost
+      ctx.font = "500 9.5px monospace";
+      ctx.fillStyle = "#78709c";
+      const keyText = truncateCanvasText(ctx, r.key, 140);
+      ctx.fillText(keyText, nx + 9, ny + NODE_H - 12);
+
+      const visText = r.vis > 0 ? `${r.vis} vis` : "Free";
+      const visW = ctx.measureText(visText).width;
+      ctx.fillText(visText, nx + NODE_W - 9 - visW, ny + NODE_H - 12);
+
+      ctx.restore();
+    }
+
+    ctx.restore();
+
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => resolve(blob), "image/png");
+    });
+  }
+
+  async function handleSavePng() {
+    const origText = els.btnSavePng.textContent;
+    els.btnSavePng.textContent = "Rendering…";
+    els.btnSavePng.disabled = true;
+    try {
+      const blob = await renderFullGraphBlob();
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `thaumonomicon-${targetKey}-${Math.round(zoomScale * 100)}pct.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      els.btnSavePng.textContent = "Saved!";
+    } catch (err) {
+      console.error("Failed to save PNG:", err);
+      els.btnSavePng.textContent = "Error";
+    } finally {
+      setTimeout(() => {
+        els.btnSavePng.textContent = origText;
+        els.btnSavePng.disabled = false;
+      }, 1400);
+    }
+  }
+
+  async function handleCopyPng() {
+    const origText = els.btnCopyPng.textContent;
+    els.btnCopyPng.textContent = "Copying…";
+    els.btnCopyPng.disabled = true;
+    try {
+      if (!navigator.clipboard || typeof ClipboardItem === "undefined") {
+        throw new Error("Clipboard API unavailable");
+      }
+      // Pass a Promise<Blob> directly into ClipboardItem so user gesture activation is preserved
+      const item = new ClipboardItem({
+        "image/png": renderFullGraphBlob(),
+      });
+      await navigator.clipboard.write([item]);
+      els.btnCopyPng.textContent = "Copied!";
+    } catch (err) {
+      console.error("Failed to copy PNG to clipboard:", err);
+      els.btnCopyPng.textContent = "Copy failed";
+    } finally {
+      setTimeout(() => {
+        els.btnCopyPng.textContent = origText;
+        els.btnCopyPng.disabled = false;
+      }, 1500);
+    }
   }
 
   function setupCanvasInteractions() {
@@ -1111,12 +1427,11 @@
     vp.addEventListener("pointerup", endPan);
     vp.addEventListener("pointercancel", endPan);
 
-    // Wheel zoom (or 2D trackpad pan if shift/deltaX without ctrl, but default wheel zooms smoothly)
+    // Wheel zoom around cursor
     vp.addEventListener(
       "wheel",
       (e) => {
         e.preventDefault();
-        // Mouse wheel zooms around cursor
         const zoomFactor = Math.exp(-e.deltaY * 0.0015);
         setZoom(zoomScale * zoomFactor, e.clientX, e.clientY);
       },
@@ -1264,6 +1579,8 @@
     els.btnZoomOut.addEventListener("click", () => setZoom(zoomScale / 1.22));
     els.btnZoomFit.addEventListener("click", () => fitGraphToViewport());
     els.btnCenterTarget.addEventListener("click", () => centerOnNode(targetKey));
+    els.btnSavePng.addEventListener("click", handleSavePng);
+    els.btnCopyPng.addEventListener("click", handleCopyPng);
 
     els.btnMakeTarget.addEventListener("click", () => {
       if (selectedKey) {
