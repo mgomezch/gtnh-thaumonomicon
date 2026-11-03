@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTNH Thaumonomicon Research Tree Explorer</title>
+  <link rel="stylesheet" href="thaumonomicon.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="brand-group">
+      <div class="brand-icon" aria-hidden="true">✦</div>
+      <div>
+        <h1>GTNH Thaumonomicon Explorer</h1>
+        <p class="subtitle">Interactive research dependency graph &amp; prerequisite solver</p>
+      </div>
+      <span class="stats-pill" id="global-stats-pill">Loading research graph...</span>
+    </div>
+
+    <nav class="header-nav" aria-label="Application navigation">
+      <a href="https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet" target="_blank" rel="noopener" class="nav-link">Wiki cheatsheet ↗</a>
+      <a href="https://github.com/mgomezch/gtnh-thaumonomicon" target="_blank" rel="noopener" class="nav-link">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="workspace">
+
+    <!-- Left Sidebar: Search, Presets, Filters & Step-by-step Unlocks -->
+    <aside class="sidebar left-sidebar" aria-label="Research search and unlock order">
+
+      <!-- Search Box -->
+      <section class="panel-section">
+        <search>
+          <label for="research-search-input" class="section-label">Search target research</label>
+          <div class="search-wrap">
+            <input
+              type="search"
+              id="research-search-input"
+              placeholder="Search by name, key, tab, or aspect..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+            <button type="button" id="btn-clear-search" class="icon-btn" aria-label="Clear search" hidden>×</button>
+            <ul id="search-results-dropdown" class="search-dropdown" role="listbox" aria-label="Matching researches" hidden></ul>
+          </div>
+        </search>
+
+        <!-- Filter by Thaumonomicon Tab -->
+        <div class="filter-row">
+          <div class="filter-item">
+            <label for="tab-filter-select" class="small-label">Filter tab</label>
+            <select id="tab-filter-select">
+              <option value="">All 27 tabs</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label for="direction-select" class="small-label">Graph mode</label>
+            <select id="direction-select">
+              <option value="prereqs">Prerequisites only</option>
+              <option value="both" selected>Prerequisites + direct unlocks</option>
+              <option value="unlocks">Full downstream unlocks</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="presets-group">
+          <span class="small-label">Notable goals</span>
+          <div class="preset-chips" id="preset-chips-container"></div>
+        </div>
+      </section>
+
+      <!-- Cumulative Tree Summary Metrics -->
+      <section class="panel-section metrics-section" aria-label="Prerequisite tree summary">
+        <div class="section-header-row">
+          <h2 class="section-title">Prerequisite summary</h2>
+          <button type="button" id="btn-reset-completed" class="text-btn" title="Clear all marked completed researches">Reset progress</button>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-label">Total steps</span>
+            <span class="metric-value accent-gold" id="stat-total-nodes">0</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Remaining</span>
+            <span class="metric-value accent-cyan" id="stat-remaining-nodes">0</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Total vis cost</span>
+            <span class="metric-value accent-purple" id="stat-total-vis">0</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Cumulative warp</span>
+            <span class="metric-value accent-crimson" id="stat-total-warp">0</span>
+          </div>
+        </div>
+        <div id="scan-summary-box" class="scan-summary-box" hidden>
+          <div class="small-label">Required scans along path</div>
+          <ul id="scan-summary-list" class="badge-list"></ul>
+        </div>
+      </section>
+
+      <!-- Topological Unlock Order Checklist -->
+      <section class="panel-section checklist-section" aria-label="Ordered research checklist">
+        <div class="section-header-row">
+          <h2 class="section-title">Unlock order (roots → target)</h2>
+          <span class="small-muted" id="checklist-count-label">0 steps</span>
+        </div>
+        <p class="helper-note">Click any item to focus its node in the tree. Check the box to mark a research as already unlocked.</p>
+        <ol id="unlock-order-list" class="unlock-list"></ol>
+      </section>
+
+    </aside>
+
+    <!-- Center Interactive Tree Viewport -->
+    <section class="canvas-stage" aria-label="Interactive dependency graph">
+
+      <!-- Floating Top-Left Legend & Breadcrumb -->
+      <div class="canvas-overlay-top">
+        <div class="legend-bar">
+          <span class="legend-item"><span class="legend-dot dot-root"></span>Always known / root</span>
+          <span class="legend-item"><span class="legend-dot dot-prereq"></span>Prerequisite</span>
+          <span class="legend-item"><span class="legend-dot dot-target"></span>Selected target</span>
+          <span class="legend-item"><span class="legend-dot dot-unlock"></span>Unlocks next</span>
+          <span class="legend-item"><span class="legend-line line-solid"></span>Same-tab (P)</span>
+          <span class="legend-item"><span class="legend-line line-dashed"></span>Cross-tab hidden (Ph)</span>
+        </div>
+      </div>
+
+      <!-- Floating Bottom-Right Viewport Controls -->
+      <div class="canvas-controls" role="toolbar" aria-label="Canvas zoom and layout controls">
+        <button type="button" id="btn-orientation" class="ctrl-btn" title="Toggle layout direction (Top-to-Bottom / Left-to-Right)">
+          <span id="orientation-label">Layout: Top → Down</span>
+        </button>
+        <div class="ctrl-divider"></div>
+        <button type="button" id="btn-zoom-out" class="ctrl-btn" aria-label="Zoom out" title="Zoom out (-)">−</button>
+        <span id="zoom-level-readout" class="zoom-readout">100%</span>
+        <button type="button" id="btn-zoom-in" class="ctrl-btn" aria-label="Zoom in" title="Zoom in (+)">+</button>
+        <button type="button" id="btn-zoom-fit" class="ctrl-btn" title="Fit entire tree in view (F)">Fit tree</button>
+        <button type="button" id="btn-center-target" class="ctrl-btn" title="Center on target research (C)">Center target</button>
+      </div>
+
+      <!-- 2D Panning & Zooming Scroll Container -->
+      <div
+        id="tree-viewport"
+        class="pan-viewport"
+        tabindex="0"
+        role="region"
+        aria-label="Interactive Thaumonomicon prerequisite tree canvas. Drag with mouse to pan, scroll wheel to zoom, or use arrow keys."
+      >
+        <div id="tree-surface" class="pan-surface">
+          <svg id="tree-edges-svg" class="edges-svg" aria-hidden="true"></svg>
+          <div id="tree-nodes-layer" class="nodes-layer"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right Sidebar: Detailed Node Inspector -->
+    <aside class="sidebar right-sidebar" id="inspector-sidebar" aria-label="Selected research details">
+      <section class="panel-section inspector-content" id="inspector-panel">
+        <div class="section-header-row">
+          <span class="tab-badge" id="insp-tab">Tab</span>
+          <button type="button" id="btn-make-target" class="btn-primary-sm" title="Set this research as the primary tree target">Set as root target</button>
+        </div>
+
+        <h2 class="insp-title" id="insp-name">Select a research</h2>
+        <div class="insp-key-row">
+          <code id="insp-key">KEY</code>
+          <button type="button" id="btn-copy-key" class="icon-btn-sm" title="Copy research key">Copy</button>
+        </div>
+
+        <label class="completed-toggle-row">
+          <input type="checkbox" id="insp-completed-check">
+          <span>Mark as already researched (unlocked)</span>
+        </label>
+
+        <!-- Stats badges -->
+        <div class="insp-stats-grid">
+          <div class="insp-stat">
+            <span class="small-label">Completer vis</span>
+            <strong id="insp-vis">0 vis</strong>
+          </div>
+          <div class="insp-stat">
+            <span class="small-label">Research warp</span>
+            <strong id="insp-warp">0 (None)</strong>
+          </div>
+          <div class="insp-stat">
+            <span class="small-label">Total ancestors</span>
+            <strong id="insp-ancestors">0</strong>
+          </div>
+          <div class="insp-stat">
+            <span class="small-label">Direct unlocks</span>
+            <strong id="insp-dependents">0</strong>
+          </div>
+        </div>
+
+        <!-- Special Notes / Warnings -->
+        <div id="insp-notes-section" class="insp-block warning-block" hidden>
+          <h3 class="block-title">Special unlock conditions</h3>
+          <ul id="insp-notes-list" class="notes-list"></ul>
+        </div>
+
+        <!-- Puzzle Anchor Aspects -->
+        <div class="insp-block">
+          <h3 class="block-title">Puzzle anchor aspects</h3>
+          <div id="insp-aspects-list" class="aspects-wrap"></div>
+        </div>
+
+        <!-- Scan Prerequisites -->
+        <div id="insp-scans-section" class="insp-block" hidden>
+          <h3 class="block-title">Required thaumometer scans (any 1)</h3>
+          <ul id="insp-scans-list" class="rel-list"></ul>
+        </div>
+
+        <!-- Direct Prerequisites -->
+        <div class="insp-block">
+          <h3 class="block-title">Direct prerequisites (<span id="insp-prereqs-count">0</span>)</h3>
+          <ul id="insp-prereqs-list" class="rel-list"></ul>
+        </div>
+
+        <!-- Direct Unlocks (What this unblocks) -->
+        <div class="insp-block">
+          <h3 class="block-title">Unblocks researches (<span id="insp-unlocks-count">0</span>)</h3>
+          <ul id="insp-unlocks-list" class="rel-list"></ul>
+        </div>
+      </section>
+    </aside>
+
+  </main>
+
+  <script src="thaumonomicon_data.js"></script>
+  <script src="thaumonomicon.js"></script>
+</body>
+</html>
