@@ -1,6 +1,6 @@
 {
   "source_url": "https://wiki.gtnewhorizons.com/wiki/Thaumonomicon",
-  "total_researches": 1134,
+  "total_researches": 1135,
   "total_tabs": 27,
   "tabs": [
     "Basic Information",
@@ -31,6 +31,282 @@
     "Blood Magic",
     "Witchery"
   ],
+  "kami_prereq_keys": [
+    "ASPECTS",
+    "CHESTSCAN",
+    "CRIMSON",
+    "DECONSTRUCTOR",
+    "ENCHANT",
+    "KNOWFRAG",
+    "NODECATALYZATION",
+    "NODEJAR",
+    "NODEPRESERVE",
+    "NODES",
+    "NODETAPPER1",
+    "NODETAPPER2",
+    "ORE",
+    "PECH",
+    "PLANTS",
+    "RESEARCH",
+    "RESEARCHDUPE",
+    "RESEARCHER1",
+    "RESEARCHER2",
+    "THAUMONOMICON",
+    "WARP",
+    "WARPWARNING",
+    "BASICTHAUMATURGY",
+    "CAP_copper",
+    "CAP_gold",
+    "CAP_silver",
+    "CAP_thaumium",
+    "FOCALMANIPULATION",
+    "FOCUS_DISENCHANTING",
+    "FOCUSEXCAVATION",
+    "FOCUSFIRE",
+    "FOCUSFROST",
+    "FOCUSHELLBAT",
+    "FOCUSPORTABLEHOLE",
+    "FOCUSPOUCH",
+    "FOCUSSHOCK",
+    "FOCUSTRADE",
+    "FOCUSWARDING",
+    "NODESTABILIZER",
+    "NODESTABILIZERADV",
+    "REPLACEWANDCAPS",
+    "REPLACEWANDCORE",
+    "ROD_blaze",
+    "ROD_blaze_staff",
+    "ROD_bone",
+    "ROD_bone_staff",
+    "ROD_greatwood",
+    "ROD_greatwood_staff",
+    "ROD_ice",
+    "ROD_ice_staff",
+    "ROD_obsidian",
+    "ROD_obsidian_staff",
+    "ROD_quartz",
+    "ROD_quartz_staff",
+    "ROD_reed",
+    "ROD_reed_staff",
+    "ROD_silverwood",
+    "ROD_silverwood_staff",
+    "SCEPTRE",
+    "VAMPBAT",
+    "VISAMULET",
+    "VISCHARGERELAY",
+    "VISPOWER",
+    "WANDPED",
+    "WANDPEDFOC",
+    "ALCHEMICALDUPLICATION",
+    "ALCHEMICALMANUFACTURE",
+    "ALUMENTUM",
+    "ARCANESPA",
+    "BATHSALTS",
+    "BOTTLETAINT",
+    "CENTRIFUGE",
+    "CRUCIBLE",
+    "DISTILESSENTIA",
+    "ENTROPICPROCESSING",
+    "ESSENTIACRYSTAL",
+    "ETHEREALBLOOM",
+    "GT_ADVANCEDMETALLURGY",
+    "GT_CRYSTALLISATION",
+    "GT_FILL_WATER_BUCKET",
+    "GT_IRON_TO_STEEL",
+    "GT_TRANSALUMINIUM",
+    "GT_TRANSANTIMONY",
+    "GT_TRANSBATTERYALLOY",
+    "GT_TRANSBISMUTH",
+    "GT_TRANSBRASS",
+    "GT_TRANSBRONZE",
+    "GT_TRANSCOBALT",
+    "GT_TRANSCUPRONICKEL",
+    "GT_TRANSELECTRUM",
+    "GT_TRANSINVAR",
+    "GT_TRANSMINERAL",
+    "GT_TRANSNICKEL",
+    "GT_TRANSSKYSTONE",
+    "GT_TRANSSOLDERINGALLOY",
+    "GT_TRANSZINC",
+    "GT_WOOD_TO_CHARCOAL",
+    "JARLABEL",
+    "JARVOID",
+    "LIQUIDDEATH",
+    "NITOR",
+    "PHIAL",
+    "PURECOPPER",
+    "PUREGOLD",
+    "PUREIRON",
+    "PURELEAD",
+    "PURESILVER",
+    "PURETIN",
+    "SANESOAP",
+    "TALLOW",
+    "THAUMATORIUM",
+    "THAUMIUM",
+    "THAUMIUMREINFORCEDJAR",
+    "TRANSCOPPER",
+    "TRANSGOLD",
+    "TRANSIRON",
+    "TRANSLEAD",
+    "TRANSSILVER",
+    "TRANSTIN",
+    "TUBEFILTER",
+    "TUBES",
+    "ALCHGRATE",
+    "ARCANEBORE",
+    "ARCANEEAR",
+    "ARCANELAMP",
+    "ARCANESTONE",
+    "ARCTABLE",
+    "ARMORFORTRESS",
+    "BANNERS",
+    "BASICARTIFACE",
+    "BELLOWS",
+    "BONEBOW",
+    "BOOTSTRAVELLER",
+    "ELEMENTALAXE",
+    "ELEMENTALHOE",
+    "ELEMENTALPICK",
+    "ELEMENTALSHOVEL",
+    "ELEMENTALSWORD",
+    "ENCHFABRIC",
+    "ESSENTIA_CELL",
+    "ESSENTIA_OUTPUT_HATCH_ME",
+    "ESSENTIA_SMELTERY",
+    "FLUXSCRUB",
+    "GOGGLES",
+    "GRATE",
+    "GT_HAZMATENCH",
+    "GT_MAGICABSORB",
+    "GT_MAGICABSORB2",
+    "GT_MAGICENERGY",
+    "GT_MAGICENERGY2",
+    "GT_MAGICENERGY3",
+    "HELMGOGGLES",
+    "HOVERGIRDLE",
+    "HOVERHARNESS",
+    "INFERNALFURNACE",
+    "INFUSION",
+    "INFUSIONENCHANTMENT",
+    "JARBRAIN",
+    "LAMPFERTILITY",
+    "LAMPGROWTH",
+    "LEVITATOR",
+    "MASKANGRYGHOST",
+    "MASKGRINNINGDEVIL",
+    "MASKSIPPINGFIEND",
+    "MIRROR",
+    "MIRRORESSENTIA",
+    "MIRRORHAND",
+    "PAVETRAVEL",
+    "PAVEWARD",
+    "PRIMALARROW",
+    "RC_Crowbar",
+    "RESTABLE",
+    "RUNICARMOR",
+    "RUNICAUGMENTATION",
+    "RUNICCHARGED",
+    "RUNICEMERGENCY",
+    "RUNICHEALING",
+    "RUNICKINETIC",
+    "SINSTONE",
+    "TABLE",
+    "THAUMOMETER",
+    "TINKERSAUGMENTATION",
+    "WARDEDARCANA",
+    "WITHERRING",
+    "ADVANCEDGOLEM",
+    "COREALCHEMY",
+    "COREBUTCHER",
+    "COREEMPTY",
+    "COREFILL",
+    "COREFISHING",
+    "COREGATHER",
+    "COREGUARD",
+    "COREHARVEST",
+    "CORELIQUID",
+    "CORELUMBER",
+    "CORESORTING",
+    "COREUSE",
+    "GOLEMBELL",
+    "GOLEMCLAY",
+    "GOLEMFETTER",
+    "GOLEMFLESH",
+    "GOLEMIRON",
+    "GOLEMSTONE",
+    "GOLEMSTRAW",
+    "GOLEMTALLOW",
+    "GOLEMTHAUMIUM",
+    "GOLEMWOOD",
+    "HUNGRYCHEST",
+    "TINYARMOR",
+    "TINYBOWTIE",
+    "TINYDART",
+    "TINYFEZ",
+    "TINYGLASSES",
+    "TINYHAMMER",
+    "TINYHAT",
+    "TINYVISOR",
+    "TRAVELTRUNK",
+    "UPGRADEAIR",
+    "UPGRADEEARTH",
+    "UPGRADEENTROPY",
+    "UPGRADEFIRE",
+    "UPGRADEORDER",
+    "UPGRADEWATER",
+    "ANIMATION_TABLET",
+    "BLOOD_SWORD",
+    "BRIGHT_NITOR",
+    "CLEANSING_TALISMAN",
+    "DARKQUARTZ",
+    "DIMENSIONSHARDS",
+    "DISLOCATOR",
+    "ENCHANTER",
+    "FIREAER",
+    "FIREAQUA",
+    "FIREIGNIS",
+    "FIREORDO",
+    "FIREPERDITIO",
+    "FIRETERRA",
+    "FOCUS_DEFLECT",
+    "FOCUS_DISLOCATION",
+    "FOCUS_ENDER_CHEST",
+    "FOCUS_FLIGHT",
+    "FOCUS_HEAL",
+    "FOCUS_SMELT",
+    "FOCUS_TELEKINESIS",
+    "FUNNEL",
+    "GAS_REMOVER",
+    "GASEOUS_LIGHT",
+    "GASEOUS_SHADOW",
+    "INFUSEDPOTIONS",
+    "INFUSEDSEED",
+    "INTERFACE",
+    "LEVITATOR_LOCOMOTIVE",
+    "MAGNETS",
+    "PLATFORM",
+    "REPAIRER",
+    "REVEALING_HELM",
+    "SHARETOME",
+    "SPELL_CLOTH",
+    "SUMMON",
+    "TTENCH_ASCENT_BOOST",
+    "TTENCH_AUTO_SMELT",
+    "TTENCH_DESINTEGRATE",
+    "TTENCH_DISPERSED",
+    "TTENCH_FINAL",
+    "TTENCH_FOCUSED",
+    "TTENCH_POUNCE",
+    "TTENCH_QUICK_DRAW",
+    "TTENCH_SHATTER",
+    "TTENCH_SHOCKWAVE",
+    "TTENCH_SLOW_FALL",
+    "TTENCH_TUNNEL",
+    "TTENCH_VALIANCE",
+    "TTENCH_VAMPIRISM",
+    "XP_TALISMAN"
+  ],
   "researches": [
     {
       "key": "ASPECTS",
@@ -49,6 +325,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -84,6 +366,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -110,6 +398,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -149,6 +443,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -169,6 +468,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -197,6 +502,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -243,6 +554,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -282,6 +599,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -328,6 +650,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -358,6 +685,11 @@
         {
           "key": "TMNODES",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -396,6 +728,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -439,6 +776,11 @@
         {
           "key": "CAP_MECHANIST",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -459,6 +801,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -485,6 +833,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -505,6 +859,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -554,6 +914,11 @@
         {
           "key": "TinyUranium",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -586,6 +951,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -627,6 +998,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -674,6 +1050,11 @@
         {
           "key": "paper",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -702,6 +1083,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -725,6 +1112,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -745,6 +1138,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -786,6 +1185,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -815,6 +1219,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -877,6 +1287,11 @@
         {
           "key": "TB.Bracelet.Gold",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -911,6 +1326,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -975,6 +1396,12 @@
         {
           "key": "CAP_SOJOURNER",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -1034,6 +1461,11 @@
         {
           "key": "BLOODLUSTUPGRADE",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1064,6 +1496,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -1123,6 +1561,11 @@
         {
           "key": "focusLiquefaction",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1222,6 +1665,11 @@
         {
           "key": "focusIllumination",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1263,6 +1711,12 @@
         {
           "key": "CometsbootsGTNH",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -1321,6 +1775,11 @@
         {
           "key": "SuperchargedMjolnir",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1379,6 +1838,12 @@
         {
           "key": "focusContainment",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -1416,6 +1881,12 @@
         {
           "key": "lensCase",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -1473,6 +1944,12 @@
         {
           "key": "FocusWeatherGTNH",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -1517,6 +1994,11 @@
         {
           "key": "PotentiaGenerator",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1556,6 +2038,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -1603,6 +2091,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1641,6 +2134,12 @@
         {
           "key": "TB.NodeMan",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -1674,6 +2173,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -1704,6 +2209,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -1752,6 +2263,11 @@
         {
           "key": "TB.Bracelet.Blaze",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1792,6 +2308,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -1840,6 +2362,11 @@
         {
           "key": "TB.Bracelet.Bone",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -1880,6 +2407,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -1962,6 +2495,11 @@
         {
           "key": "ROD_TRANSMUTATION",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2040,6 +2578,11 @@
         {
           "key": "ROD_TRANSMUTATION_staff",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2085,6 +2628,11 @@
         {
           "key": "TB.Bracelet.Ice",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2125,6 +2673,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -2173,6 +2727,11 @@
         {
           "key": "TB.Bracelet.Obsidian",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2213,6 +2772,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -2261,6 +2826,11 @@
         {
           "key": "TB.Bracelet.Quartz",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2301,6 +2871,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -2349,6 +2925,11 @@
         {
           "key": "TB.Bracelet.Reed",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2389,6 +2970,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -2461,6 +3048,11 @@
         {
           "key": "TB.Bracelet.Silverwood",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2516,6 +3108,12 @@
         {
           "key": "ROD_witchwood_staff",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -2551,6 +3149,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -2594,6 +3198,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -2633,6 +3243,12 @@
         {
           "key": "SUBCOLLAR",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -2673,6 +3289,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -2768,6 +3390,11 @@
         {
           "key": "visDynamo",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2840,6 +3467,11 @@
         {
           "key": "CAP_SOJOURNER",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -2880,6 +3512,12 @@
         {
           "key": "NODE_MANIPULATOR",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -2922,6 +3560,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -2968,6 +3611,11 @@
         {
           "key": "ROSEVINE",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3023,6 +3671,11 @@
         {
           "key": "SuperchargedMjolnir",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3054,6 +3707,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -3103,6 +3762,11 @@
         {
           "key": "SAUNASTOVE",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3156,6 +3820,12 @@
         {
           "key": "TERRAFORMFOCUS_TAINT",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -3201,6 +3871,11 @@
         {
           "key": "TERRAFORMER",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3279,6 +3954,11 @@
         {
           "key": "TB.SM",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3391,6 +4071,11 @@
         {
           "key": "FUMEFILTER",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3435,6 +4120,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3477,6 +4167,12 @@
         {
           "key": "alchemite",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -3529,6 +4225,12 @@
         {
           "key": "TAINTTREE",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -3607,6 +4309,11 @@
         {
           "key": "VINTEUM",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3639,6 +4346,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -3662,6 +4375,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -3704,6 +4423,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3735,6 +4459,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -3781,6 +4511,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3820,6 +4555,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3853,6 +4593,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -3892,6 +4637,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -3953,6 +4703,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -3986,6 +4741,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -4025,6 +4785,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -4070,6 +4835,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4109,6 +4879,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4140,6 +4915,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -4186,6 +4967,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4217,6 +5003,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -4259,6 +5051,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4298,6 +5095,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4331,6 +5133,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -4427,6 +5234,11 @@
         {
           "key": "LABELLIB",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4475,6 +5287,12 @@
         {
           "key": "TrashjarGTNH",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4522,6 +5340,12 @@
         {
           "key": "focusDisintegration",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4593,6 +5417,11 @@
         {
           "key": "DIVINATIONSIGIL",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4613,6 +5442,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -4652,6 +5487,12 @@
         {
           "key": "METALLURGICPERFECTION_CLUSTERS",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4689,6 +5530,12 @@
         {
           "key": "METALLURGICPERFECTION_CLUSTERS",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4748,6 +5595,11 @@
         {
           "key": "PURECINNABAR",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -4785,6 +5637,12 @@
         {
           "key": "METALLURGICPERFECTION_CLUSTERS",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4822,6 +5680,12 @@
         {
           "key": "METALLURGICPERFECTION_CLUSTERS",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4859,6 +5723,12 @@
         {
           "key": "METALLURGICPERFECTION_CLUSTERS",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4901,6 +5771,12 @@
         {
           "key": "TI_SanitizingSoapAlpha",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -4964,6 +5840,11 @@
         {
           "key": "CANDELABRA",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5006,6 +5887,12 @@
         {
           "key": "essentiaInjection",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -5205,6 +6092,11 @@
         {
           "key": "WGBAUBLES",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5239,6 +6131,12 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -5281,6 +6179,11 @@
         {
           "key": "METALLURGICPERFECTION_TRANSMUTATION",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5324,6 +6227,11 @@
         {
           "key": "METALLURGICPERFECTION_TRANSMUTATION",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5383,6 +6291,11 @@
         {
           "key": "METALLURGICPERFECTION_TRANSMUTATION",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5426,6 +6339,11 @@
         {
           "key": "METALLURGICPERFECTION_TRANSMUTATION",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5465,6 +6383,11 @@
         {
           "key": "METALLURGICPERFECTION_TRANSMUTATION",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5508,6 +6431,11 @@
         {
           "key": "METALLURGICPERFECTION_TRANSMUTATION",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5557,6 +6485,11 @@
         {
           "key": "AURA_PYLON",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5605,6 +6538,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5644,6 +6582,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -5689,6 +6633,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5730,6 +6679,12 @@
         {
           "key": "lensWater",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -5767,6 +6722,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -5815,6 +6775,11 @@
         {
           "key": "ALTAR",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5840,6 +6805,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -5914,6 +6885,11 @@
         {
           "key": "PRIMORDIALARMOR",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -5943,6 +6919,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -5985,6 +6967,12 @@
         {
           "key": "ROD_TRANSMUTATION_staff",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -6033,6 +7021,11 @@
         {
           "key": "TB.AdvAlc",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6077,6 +7070,11 @@
         {
           "key": "injector",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6138,6 +7136,11 @@
         {
           "key": "MeteorbootsGTNH",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6187,6 +7190,11 @@
         {
           "key": "GOLEMCOREBREAK",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6229,6 +7237,12 @@
         {
           "key": "ElectricHoeofGrowth",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -6283,6 +7297,12 @@
         {
           "key": "GOLEMCOREBREAK",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -6333,6 +7353,12 @@
         {
           "key": "GOLEMCOREBREAK",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -6383,6 +7409,12 @@
         {
           "key": "GOLEMCOREBODYGUARD",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -6453,6 +7485,11 @@
         {
           "key": "ADVANCEDROBES",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6487,6 +7524,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -6518,6 +7561,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -6557,6 +7606,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -6609,6 +7663,12 @@
         {
           "key": "TB.Foci.Flux",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -6689,6 +7749,11 @@
         {
           "key": "TI_DeliciousKromer",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6713,6 +7778,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -6746,6 +7816,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -6785,6 +7861,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6815,6 +7896,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -6858,6 +7945,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6894,6 +7986,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -6924,6 +8021,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -6966,6 +8069,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -7003,6 +8112,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -7052,6 +8167,11 @@
         {
           "key": "StabilizerbeltGTNH",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -7100,6 +8220,11 @@
         {
           "key": "INFERNALBLASTFURNACE",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -7973,6 +9098,11 @@
         {
           "key": "WATERSIGIL",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -8108,6 +9238,11 @@
         {
           "key": "ENCH_UNVEILING",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -8175,6 +9310,11 @@
         {
           "key": "soulExtractor",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -8218,6 +9358,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -8267,6 +9413,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8308,6 +9460,12 @@
         {
           "key": "nightmareInfusion",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8340,6 +9498,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -8378,6 +9542,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8410,6 +9580,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -8500,6 +9676,11 @@
         {
           "key": "WAND_AUGMENTATION",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -8548,6 +9729,12 @@
         {
           "key": "MIRRORPUMP",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8592,6 +9779,12 @@
         {
           "key": "TB.Foci.Activation",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8622,6 +9815,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -8662,6 +9861,12 @@
         {
           "key": "NODE_MANIPULATOR",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8695,6 +9900,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -8734,6 +9945,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8759,6 +9976,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -8837,6 +10060,11 @@
         {
           "key": "VoidSashGTNH",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -8882,6 +10110,12 @@
         {
           "key": "runicCreature",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8915,6 +10149,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -8954,6 +10194,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -8987,6 +10233,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -9026,6 +10278,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -9059,6 +10317,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -9089,6 +10353,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9115,6 +10384,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9138,6 +10412,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -9198,6 +10478,12 @@
         {
           "key": "BMLAVACRYSTAL",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -9229,6 +10515,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -9297,6 +10589,12 @@
         {
           "key": "golemPowder",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -9336,6 +10634,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -9372,6 +10676,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -9420,6 +10730,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9461,6 +10776,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9497,6 +10817,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -9547,6 +10873,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9589,6 +10920,11 @@
         {
           "key": "GOLEMCOREBODYGUARD",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9639,6 +10975,11 @@
         {
           "key": "GOLEMCOREBREAK",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9677,6 +11018,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9713,6 +11059,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -9756,6 +11108,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -9806,6 +11164,12 @@
         {
           "key": "INFUSIONCLAW",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -9861,6 +11225,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9903,6 +11272,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -9940,6 +11314,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -9972,6 +11352,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -10014,6 +11400,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -10054,6 +11445,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -10101,6 +11497,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -10143,6 +11544,12 @@
         {
           "key": "GOLEMSILVERWOOD",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -10188,6 +11595,12 @@
         {
           "key": "golemPowder",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -10231,6 +11644,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -10287,6 +11705,11 @@
         {
           "key": "HUNGERBAG",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -10317,6 +11740,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -10357,6 +11786,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -10387,6 +11822,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -10427,6 +11868,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -10464,6 +11911,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -10494,6 +11947,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -10534,6 +11993,12 @@
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -10564,6 +12029,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -10602,6 +12073,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true,
           "kami_leaf": true
@@ -10644,6 +12121,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -10681,6 +12163,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -10722,6 +12209,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -10759,6 +12251,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -10804,6 +12301,11 @@
           "key": "ICHOR",
           "type": "Ph",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "via_kami": true
         }
       ]
     },
@@ -10841,6 +12343,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "Ph",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "Ph",
           "via_kami": true
         }
@@ -16169,6 +17676,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -16246,6 +17759,11 @@
         {
           "key": "SUMMON",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16309,6 +17827,11 @@
         },
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true
         }
@@ -16420,6 +17943,11 @@
         {
           "key": "PLATFORM",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16450,6 +17978,11 @@
         {
           "key": "INTERFACE",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16484,6 +18017,14 @@
         {
           "key": "ICHOR",
           "type": "P",
+          "via_kami": true,
+          "kami_direct": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
           "kami_leaf": true
         }
       ]
@@ -16520,6 +18061,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -16590,6 +18137,11 @@
         {
           "key": "TTENCH_VAMPIRISM",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16634,6 +18186,11 @@
         {
           "key": "INFUSEDSEED",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16678,6 +18235,11 @@
         {
           "key": "INFUSEDSEED",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16722,6 +18284,11 @@
         {
           "key": "INFUSEDSEED",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16766,6 +18333,11 @@
         {
           "key": "INFUSEDSEED",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16810,6 +18382,11 @@
         {
           "key": "INFUSEDSEED",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16854,6 +18431,11 @@
         {
           "key": "INFUSEDSEED",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16903,6 +18485,11 @@
           "key": "ICHOR",
           "type": "P",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -16946,6 +18533,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -16981,6 +18574,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -17037,6 +18636,11 @@
           "key": "ICHOR",
           "type": "P",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -17072,6 +18676,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -17176,6 +18786,11 @@
           "key": "ICHOR",
           "type": "P",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -17217,6 +18832,11 @@
         {
           "key": "MAGNETS",
           "type": "Ph"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -17290,6 +18910,11 @@
         {
           "key": "REPAIRER",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -17318,6 +18943,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -17361,6 +18992,11 @@
           "key": "ICHOR",
           "type": "P",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -17398,6 +19034,11 @@
           "key": "ICHOR",
           "type": "P",
           "via_kami": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -17421,8 +19062,15 @@
       "always_known": false,
       "parents": [
         {
+          "key": "KAMI_UNLOCKED",
+          "type": "Ph",
+          "is_kami_bundle_edge": true
+        },
+        {
           "key": "DIMENSIONSHARDS",
           "type": "P",
+          "via_kami": true,
+          "kami_direct": true,
           "kami_leaf": true
         },
         {
@@ -19616,6 +21264,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -19676,6 +21330,11 @@
         {
           "key": "INFUSEDPOTIONS",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -19720,6 +21379,11 @@
         {
           "key": "MAGNETS",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -19756,6 +21420,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -19805,6 +21475,11 @@
         {
           "key": "LEVITATOR_LOCOMOTIVE",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -19863,6 +21538,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -19944,6 +21625,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -19979,6 +21666,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -20061,6 +21754,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -20109,6 +21808,11 @@
         {
           "key": "XP_TALISMAN",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20144,6 +21848,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -20184,6 +21894,11 @@
         {
           "key": "TTENCH_POUNCE",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20221,6 +21936,11 @@
         {
           "key": "TTENCH_TUNNEL",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20258,6 +21978,11 @@
         {
           "key": "TTENCH_SHATTER",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20296,6 +22021,11 @@
         {
           "key": "TTENCH_FINAL",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20333,6 +22063,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -20374,6 +22110,11 @@
         {
           "key": "TTENCH_FINAL",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20409,6 +22150,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -20440,6 +22187,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -20478,6 +22231,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -20510,6 +22269,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -20550,6 +22315,11 @@
         {
           "key": "TTENCH_SHOCKWAVE",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20585,6 +22355,12 @@
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
         }
       ]
     },
@@ -20617,6 +22393,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -20665,6 +22447,11 @@
         {
           "key": "TTENCH_VALIANCE",
           "type": "P"
+        },
+        {
+          "key": "KAMI_UNLOCKED",
+          "type": "P",
+          "via_kami": true
         }
       ]
     },
@@ -20743,6 +22530,12 @@
       "unlocks": [
         {
           "key": "ICHOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KAMI_UNLOCKED",
           "type": "P",
           "via_kami": true,
           "kami_leaf": true
@@ -43932,6 +45725,1679 @@
       "condition_badge": "",
       "condition_category": "",
       "unlocks": []
+    },
+    {
+      "key": "KAMI_UNLOCKED",
+      "name": "All Kami Research",
+      "tab": "Thaumic Tinkering",
+      "tab_id": "Thaumic_Tinkering",
+      "warp": 0,
+      "vis": 0,
+      "kami_total_vis": 9391,
+      "kami_total_warp": 152,
+      "kami_prereq_count": 274,
+      "is_kami_bundle": true,
+      "aspects": [],
+      "always_known": false,
+      "parents": [
+        {
+          "key": "ASPECTS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "CHESTSCAN",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "CRIMSON",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "DECONSTRUCTOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ENCHANT",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "KNOWFRAG",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "NODECATALYZATION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "NODEJAR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "NODEPRESERVE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "NODES",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "NODETAPPER1",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "NODETAPPER2",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ORE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PECH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PLANTS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RESEARCH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "RESEARCHDUPE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RESEARCHER1",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "RESEARCHER2",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "THAUMONOMICON",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "WARP",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "WARPWARNING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "BASICTHAUMATURGY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "CAP_copper",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "CAP_gold",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "CAP_silver",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "CAP_thaumium",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCALMANIPULATION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUS_DISENCHANTING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUSEXCAVATION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUSFIRE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUSFROST",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUSHELLBAT",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUSPORTABLEHOLE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUSPOUCH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUSSHOCK",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUSTRADE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUSWARDING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "NODESTABILIZER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "NODESTABILIZERADV",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "REPLACEWANDCAPS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "REPLACEWANDCORE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ROD_blaze",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_blaze_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ROD_bone",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_bone_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ROD_greatwood",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_greatwood_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_ice",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_ice_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ROD_obsidian",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_obsidian_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ROD_quartz",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_quartz_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ROD_reed",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_reed_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ROD_silverwood",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ROD_silverwood_staff",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "SCEPTRE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "VAMPBAT",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "VISAMULET",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "VISCHARGERELAY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "VISPOWER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "WANDPED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "WANDPEDFOC",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ALCHEMICALDUPLICATION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ALCHEMICALMANUFACTURE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ALUMENTUM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ARCANESPA",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "BATHSALTS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "BOTTLETAINT",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "CENTRIFUGE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "CRUCIBLE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "DISTILESSENTIA",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ENTROPICPROCESSING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ESSENTIACRYSTAL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ETHEREALBLOOM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_ADVANCEDMETALLURGY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_CRYSTALLISATION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_FILL_WATER_BUCKET",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_IRON_TO_STEEL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSALUMINIUM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_TRANSANTIMONY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSBATTERYALLOY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSBISMUTH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSBRASS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSBRONZE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSCOBALT",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSCUPRONICKEL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSELECTRUM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSINVAR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSMINERAL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_TRANSNICKEL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSSKYSTONE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_TRANSSOLDERINGALLOY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_TRANSZINC",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_WOOD_TO_CHARCOAL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "JARLABEL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "JARVOID",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "LIQUIDDEATH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "NITOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "PHIAL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PURECOPPER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PUREGOLD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PUREIRON",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "PURELEAD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PURESILVER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PURETIN",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "SANESOAP",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TALLOW",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "THAUMATORIUM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "THAUMIUM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "THAUMIUMREINFORCEDJAR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TRANSCOPPER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TRANSGOLD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TRANSIRON",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TRANSLEAD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TRANSSILVER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TRANSTIN",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TUBEFILTER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TUBES",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ALCHGRATE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ARCANEBORE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ARCANEEAR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ARCANELAMP",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ARCANESTONE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ARCTABLE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ARMORFORTRESS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "BANNERS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "BASICARTIFACE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "BELLOWS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "BONEBOW",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "BOOTSTRAVELLER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ELEMENTALAXE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ELEMENTALHOE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ELEMENTALPICK",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ELEMENTALSHOVEL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ELEMENTALSWORD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ENCHFABRIC",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ESSENTIA_CELL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ESSENTIA_OUTPUT_HATCH_ME",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ESSENTIA_SMELTERY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FLUXSCRUB",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GOGGLES",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GRATE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_HAZMATENCH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_MAGICABSORB",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_MAGICABSORB2",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GT_MAGICENERGY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_MAGICENERGY2",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GT_MAGICENERGY3",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "HELMGOGGLES",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "HOVERGIRDLE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "HOVERHARNESS",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "INFERNALFURNACE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "INFUSION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "INFUSIONENCHANTMENT",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "JARBRAIN",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "LAMPFERTILITY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "LAMPGROWTH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "LEVITATOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "MASKANGRYGHOST",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "MASKGRINNINGDEVIL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "MASKSIPPINGFIEND",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "MIRROR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "MIRRORESSENTIA",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "MIRRORHAND",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PAVETRAVEL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PAVEWARD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "PRIMALARROW",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RC_Crowbar",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RESTABLE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RUNICARMOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "RUNICAUGMENTATION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RUNICCHARGED",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RUNICEMERGENCY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RUNICHEALING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "RUNICKINETIC",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "SINSTONE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TABLE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "THAUMOMETER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TINKERSAUGMENTATION",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "WARDEDARCANA",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "WITHERRING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ADVANCEDGOLEM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "COREALCHEMY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "COREBUTCHER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "COREEMPTY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "COREFILL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "COREFISHING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "COREGATHER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "COREGUARD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "COREHARVEST",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "CORELIQUID",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "CORELUMBER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "CORESORTING",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "COREUSE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GOLEMBELL",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GOLEMCLAY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GOLEMFETTER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GOLEMFLESH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GOLEMIRON",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GOLEMSTONE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GOLEMSTRAW",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GOLEMTALLOW",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GOLEMTHAUMIUM",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GOLEMWOOD",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "HUNGRYCHEST",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TINYARMOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TINYBOWTIE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TINYDART",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TINYFEZ",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TINYGLASSES",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TINYHAMMER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TINYHAT",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TINYVISOR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TRAVELTRUNK",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "UPGRADEAIR",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "UPGRADEEARTH",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "UPGRADEENTROPY",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "UPGRADEFIRE",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "UPGRADEORDER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "UPGRADEWATER",
+          "type": "Ph",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "ANIMATION_TABLET",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "BLOOD_SWORD",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "BRIGHT_NITOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "CLEANSING_TALISMAN",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "DARKQUARTZ",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "DIMENSIONSHARDS",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "DISLOCATOR",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "ENCHANTER",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FIREAER",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FIREAQUA",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FIREIGNIS",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FIREORDO",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FIREPERDITIO",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FIRETERRA",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUS_DEFLECT",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUS_DISLOCATION",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUS_ENDER_CHEST",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUS_FLIGHT",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUS_HEAL",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "FOCUS_SMELT",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FOCUS_TELEKINESIS",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "FUNNEL",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GAS_REMOVER",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "GASEOUS_LIGHT",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "GASEOUS_SHADOW",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "INFUSEDPOTIONS",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "INFUSEDSEED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "INTERFACE",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "LEVITATOR_LOCOMOTIVE",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "MAGNETS",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "PLATFORM",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "REPAIRER",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "REVEALING_HELM",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "SHARETOME",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "SPELL_CLOTH",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "SUMMON",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_ASCENT_BOOST",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TTENCH_AUTO_SMELT",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TTENCH_DESINTEGRATE",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TTENCH_DISPERSED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TTENCH_FINAL",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_FOCUSED",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TTENCH_POUNCE",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_QUICK_DRAW",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_SHATTER",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_SHOCKWAVE",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_SLOW_FALL",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "TTENCH_TUNNEL",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_VALIANCE",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        },
+        {
+          "key": "TTENCH_VAMPIRISM",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": false
+        },
+        {
+          "key": "XP_TALISMAN",
+          "type": "P",
+          "via_kami": true,
+          "kami_leaf": true
+        }
+      ],
+      "scans": [],
+      "notes": [
+        "Requires completing all 274 pre-Ichor researches across Basic Information, Thaumaturgy, Alchemy, Artifice, Golemancy, and Thaumic Tinkering (/iskamiunlocked)."
+      ],
+      "condition_badge": "✦ 274 Researches",
+      "condition_category": "kami",
+      "unlocks": [
+        {
+          "key": "ICHOR",
+          "type": "Ph",
+          "is_kami_bundle_edge": true
+        }
+      ]
     }
   ]
 }

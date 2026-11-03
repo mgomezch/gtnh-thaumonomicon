@@ -12,6 +12,7 @@
     { key: "ELDRITCHMAJOR", label: "Eldritch Revelation" },
     { key: "PRIMPEARL", label: "Primordial Pearl" },
     { key: "OUTERREV", label: "Outer Lands" },
+    { key: "KAMI_UNLOCKED", label: "KAMI" },
     { key: "ICHOR", label: "Ichor" },
     { key: "ICHORCLOTH_ARMOR", label: "Ichorcloth Armor" },
     { key: "PLACEMENT_MIRROR", label: "Worldshaper's Glass" },
@@ -37,6 +38,8 @@
   let graphMode = "both"; // 'prereqs' | 'both' | 'unlocks'
   let layoutDir = "TB"; // 'TB' (Top-to-Bottom) | 'LR' (Left-to-Right)
   let zoomScale = 1.0;
+  let collapseKami = true;
+  let kamiTargetForceCollapsed = false;
   let completedKeys = new Set();
 
   // Current rendered graph state
@@ -61,6 +64,10 @@
           completedKeys = new Set(arr);
         }
       }
+      const savedCollapse = localStorage.getItem("gtnh_thaumonomicon_collapse_kami_v1");
+      if (savedCollapse !== null) {
+        collapseKami = savedCollapse === "true";
+      }
     } catch (_) {
       completedKeys = new Set();
     }
@@ -72,7 +79,40 @@
         "gtnh_thaumonomicon_completed_v1",
         JSON.stringify(Array.from(completedKeys))
       );
+      localStorage.setItem(
+        "gtnh_thaumonomicon_collapse_kami_v1",
+        String(collapseKami)
+      );
     } catch (_) {}
+  }
+
+  function getEffectiveParents(r, rootTargetKey) {
+    if (!r || !r.parents) return [];
+    const shouldCollapse =
+      rootTargetKey === "KAMI_UNLOCKED" ? kamiTargetForceCollapsed : collapseKami;
+    if (r.is_kami_bundle) {
+      return shouldCollapse ? [] : r.parents;
+    }
+    if (shouldCollapse) {
+      return r.parents.filter((p) => !p.via_kami);
+    }
+    return r.parents.filter((p) => !p.is_kami_bundle_edge);
+  }
+
+  function getEffectiveUnlocks(r, rootTargetKey) {
+    if (!r || !r.unlocks) return [];
+    const shouldCollapse =
+      rootTargetKey === "KAMI_UNLOCKED" ? kamiTargetForceCollapsed : collapseKami;
+    return r.unlocks.filter((u) => {
+      if (shouldCollapse) {
+        if (u.via_kami && !u.kami_direct) return false;
+        return true;
+      } else {
+        if (u.key === "KAMI_UNLOCKED") return false;
+        if (u.via_kami && !u.kami_leaf && !u.kami_direct) return false;
+        return true;
+      }
+    });
   }
 
   function getWarpSeverityLabel(warp) {
@@ -104,6 +144,7 @@
     els.searchDropdown = document.getElementById("search-results-dropdown");
     els.tabFilterSelect = document.getElementById("tab-filter-select");
     els.directionSelect = document.getElementById("direction-select");
+    els.collapseKamiCheck = document.getElementById("collapse-kami-check");
     els.presetChipsContainer = document.getElementById("preset-chips-container");
 
     els.btnResetCompleted = document.getElementById("btn-reset-completed");
@@ -136,7 +177,7 @@
     els.btnMakeTarget = document.getElementById("btn-make-target");
     els.inspName = document.getElementById("insp-name");
     els.inspKey = document.getElementById("insp-key");
-    els.btnCopyKey = document.getElementById("btn-copy-key");
+    els.btnCopyKey = document.getElementById("insp-copy-key") || document.getElementById("btn-copy-key");
     els.inspCompletedCheck = document.getElementById("insp-completed-check");
     els.inspVis = document.getElementById("insp-vis");
     els.inspWarp = document.getElementById("insp-warp");
@@ -155,6 +196,9 @@
 
   function populateTabsAndPresets() {
     els.globalStatsPill.textContent = `${rawData.total_researches.toLocaleString()} researches · ${rawData.total_tabs} tabs`;
+    if (els.collapseKamiCheck) {
+      els.collapseKamiCheck.checked = collapseKami;
+    }
 
     // Populate tabs dropdown
     const countsByTab = new Map();
@@ -192,14 +236,14 @@
     const targetNode = byKey.get(rootTargetKey);
     if (!targetNode) return null;
 
-    // 1. Collect all prerequisite ancestors via BFS
+    // 1. Collect all prerequisite ancestors via BFS using effective parents
     const prereqSet = new Set([rootTargetKey]);
     const queue = [rootTargetKey];
     while (queue.length > 0) {
       const curKey = queue.shift();
       const cur = byKey.get(curKey);
       if (!cur) continue;
-      for (const p of cur.parents || []) {
+      for (const p of getEffectiveParents(cur, rootTargetKey)) {
         if (byKey.has(p.key) && !prereqSet.has(p.key)) {
           prereqSet.add(p.key);
           queue.push(p.key);
@@ -211,7 +255,7 @@
     const unlockSet = new Set();
     if (mode === "both") {
       // Include direct 1-hop unlocks from target
-      for (const u of targetNode.unlocks || []) {
+      for (const u of getEffectiveUnlocks(targetNode, rootTargetKey)) {
         if (byKey.has(u.key) && !prereqSet.has(u.key)) {
           unlockSet.add(u.key);
         }
@@ -223,7 +267,7 @@
         const curKey = uQueue.shift();
         const cur = byKey.get(curKey);
         if (!cur) continue;
-        for (const u of cur.unlocks || []) {
+        for (const u of getEffectiveUnlocks(cur, rootTargetKey)) {
           if (byKey.has(u.key) && !prereqSet.has(u.key) && !unlockSet.has(u.key)) {
             unlockSet.add(u.key);
             uQueue.push(u.key);
@@ -246,12 +290,12 @@
     for (const k of activeKeys) {
       const r = byKey.get(k);
       if (!r) continue;
-      for (const p of r.parents || []) {
+      for (const p of getEffectiveParents(r, rootTargetKey)) {
         if (activeKeys.has(p.key)) {
           // If this is an expanded /iskamiunlocked prerequisite that already has
           // downstream dependents within the Kami prerequisite set, let its chain
-          // flow through those dependents into ICHOR rather than duplicating a redundant
-          // transitive edge from every intermediate node directly to ICHOR.
+          // flow through those dependents into ICHOR / KAMI_UNLOCKED rather than duplicating
+          // a redundant transitive edge from every intermediate node directly.
           if (p.via_kami && p.kami_leaf === false) {
             continue;
           }
@@ -579,11 +623,14 @@
 
       const badges = document.createElement("div");
       badges.className = "node-badges";
-      if (r.warp > 0) {
+      const displayWarp = r.is_kami_bundle ? r.kami_total_warp || 0 : r.warp || 0;
+      if (displayWarp > 0) {
         const wTag = document.createElement("span");
         wTag.className = "node-warp-tag";
-        wTag.textContent = `W:${r.warp}`;
-        wTag.title = `Warp: ${getWarpSeverityLabel(r.warp)}`;
+        wTag.textContent = `W:${displayWarp}`;
+        wTag.title = r.is_kami_bundle
+          ? `Cumulative Warp across ${r.kami_prereq_count} KAMI prerequisites: ${displayWarp}`
+          : `Warp: ${getWarpSeverityLabel(r.warp)}`;
         badges.appendChild(wTag);
       }
       if (r.condition_badge) {
@@ -619,7 +666,10 @@
       botBar.appendChild(keySpan);
 
       const visSpan = document.createElement("span");
-      if (r.vis > 0) {
+      if (r.is_kami_bundle) {
+        visSpan.textContent = `${(r.kami_total_vis || 0).toLocaleString()} vis`;
+        visSpan.style.color = "#e9d5ff";
+      } else if (r.vis > 0) {
         visSpan.textContent = `${r.vis} vis`;
       } else if (r.condition_category === "warp" || r.condition_category === "event") {
         visSpan.textContent = "Event unlock";
@@ -697,8 +747,21 @@
       const isDone = completedKeys.has(k) || r.always_known;
       if (!isDone) {
         remainingSteps++;
-        totalVis += r.vis || 0;
-        totalWarp += r.warp || 0;
+        if (r.is_kami_bundle && getEffectiveParents(r, targetKey).length === 0) {
+          // Single-box collapsed mode: sum any KAMI prerequisites not already in sg.prereqSet or completedKeys
+          for (const p of r.parents || []) {
+            if (!sg.prereqSet.has(p.key) && !completedKeys.has(p.key)) {
+              const pr = byKey.get(p.key);
+              if (pr && !pr.always_known) {
+                totalVis += pr.vis || 0;
+                totalWarp += pr.warp || 0;
+              }
+            }
+          }
+        } else {
+          totalVis += r.vis || 0;
+          totalWarp += r.warp || 0;
+        }
 
         if (r.notes && r.notes.length > 0 && r.condition_badge) {
           const cid = `cond:${r.key}`;
@@ -797,8 +860,10 @@
       const meta = document.createElement("div");
       meta.className = "unlock-item-meta";
       meta.innerHTML = `<span>${r.tab}</span>`;
-      if (r.vis > 0) meta.innerHTML += `<span>· ${r.vis} vis</span>`;
-      if (r.warp > 0) meta.innerHTML += `<span style="color:#fda4af;">· ${r.warp} warp</span>`;
+      const itemVis = r.is_kami_bundle ? r.kami_total_vis || 0 : r.vis || 0;
+      const itemWarp = r.is_kami_bundle ? r.kami_total_warp || 0 : r.warp || 0;
+      if (itemVis > 0) meta.innerHTML += `<span>· ${itemVis.toLocaleString()} vis</span>`;
+      if (itemWarp > 0) meta.innerHTML += `<span style="color:#fda4af;">· ${itemWarp} warp</span>`;
       if (r.condition_badge) {
         meta.innerHTML += `<span style="color:#fde68a;">· ${r.condition_badge}</span>`;
       }
@@ -858,6 +923,9 @@
     if (!byKey.has(key)) return;
     targetKey = key;
     selectedKey = key;
+    if (key === "KAMI_UNLOCKED") {
+      kamiTargetForceCollapsed = false;
+    }
 
     // Update URL hash without scrolling
     if (history.replaceState) {
@@ -885,7 +953,8 @@
       const cur = q.shift();
       const r = byKey.get(cur);
       if (!r) continue;
-      for (const p of r.parents || []) {
+      const parents = cur === "KAMI_UNLOCKED" ? r.parents || [] : getEffectiveParents(r, key);
+      for (const p of parents) {
         if (byKey.has(p.key) && !visited.has(p.key)) {
           visited.add(p.key);
           q.push(p.key);
@@ -910,19 +979,26 @@
     els.inspCompletedCheck.checked = isDone;
     els.inspCompletedCheck.disabled = r.always_known;
 
-    if (r.vis > 0) {
-      els.inspVis.textContent = `${r.vis} vis`;
-    } else if (r.condition_category === "warp" || r.condition_category === "event") {
-      els.inspVis.textContent = "0 (Unlocked by in-game event)";
-    } else if (r.always_known) {
-      els.inspVis.textContent = "0 (Always known)";
+    if (r.is_kami_bundle) {
+      els.inspVis.textContent = `${(r.kami_total_vis || 0).toLocaleString()} vis (${r.kami_prereq_count} researches)`;
+      els.inspWarp.textContent = `${r.kami_total_warp || 0} cumulative`;
+      els.inspWarp.style.color = "#fda4af";
     } else {
-      els.inspVis.textContent = "0 (Free)";
+      if (r.vis > 0) {
+        els.inspVis.textContent = `${r.vis} vis`;
+      } else if (r.condition_category === "warp" || r.condition_category === "event") {
+        els.inspVis.textContent = "0 (Unlocked by in-game event)";
+      } else if (r.always_known) {
+        els.inspVis.textContent = "0 (Always known)";
+      } else {
+        els.inspVis.textContent = "0 (Free)";
+      }
+      els.inspWarp.textContent = getWarpSeverityLabel(r.warp);
+      els.inspWarp.style.color = r.warp > 0 ? "#fda4af" : "var(--text-main)";
     }
-    els.inspWarp.textContent = getWarpSeverityLabel(r.warp);
-    els.inspWarp.style.color = r.warp > 0 ? "#fda4af" : "var(--text-main)";
     els.inspAncestors.textContent = countTransitiveAncestors(r.key).toLocaleString();
-    els.inspDependents.textContent = (r.unlocks || []).length.toLocaleString();
+    const effectiveUnlocks = getEffectiveUnlocks(r, targetKey);
+    els.inspDependents.textContent = effectiveUnlocks.length.toLocaleString();
 
     // Special notes
     if (r.notes && r.notes.length > 0) {
@@ -979,8 +1055,8 @@
       els.inspScansSection.hidden = true;
     }
 
-    // Direct prerequisites
-    const parents = r.parents || [];
+    // Direct prerequisites (for KAMI_UNLOCKED, always list all 274 researches in the inspector)
+    const parents = r.is_kami_bundle ? r.parents || [] : getEffectiveParents(r, targetKey);
     els.inspPrereqsCount.textContent = parents.length;
     els.inspPrereqsList.innerHTML = "";
     if (parents.length === 0) {
@@ -1002,8 +1078,14 @@
         const li = document.createElement("li");
         li.className = "rel-item";
         const badgeCls = p.type === "Ph" ? "badge-ph" : "badge-p";
-        const badgeText = p.via_kami ? `${p.type} · Kami` : p.type;
-        const badgeTitle = p.via_kami
+        const badgeText = p.is_kami_bundle_edge
+          ? "Ph · 274"
+          : p.via_kami
+          ? `${p.type} · Kami`
+          : p.type;
+        const badgeTitle = p.is_kami_bundle_edge
+          ? "All 274 pre-Ichor researches required by /iskamiunlocked"
+          : p.via_kami
           ? "Required by /iskamiunlocked (All Kami Research)"
           : p.type === "Ph"
           ? "Hidden prerequisite (different tab or non-obvious link)"
@@ -1027,7 +1109,7 @@
     }
 
     // Direct unlocks
-    const unlocks = r.unlocks || [];
+    const unlocks = effectiveUnlocks;
     els.inspUnlocksCount.textContent = unlocks.length;
     els.inspUnlocksList.innerHTML = "";
     if (unlocks.length === 0) {
@@ -1386,8 +1468,9 @@
         ctx.fillText(sText, rightCursor + 4, ny + 15.5);
         rightCursor -= 4;
       }
-      if (r.warp > 0) {
-        const wText = `W:${r.warp}`;
+      const displayWarp = r.is_kami_bundle ? r.kami_total_warp || 0 : r.warp || 0;
+      if (displayWarp > 0) {
+        const wText = `W:${displayWarp}`;
         const ww = ctx.measureText(wText).width + 8;
         rightCursor -= ww;
         drawRoundedRect(ctx, rightCursor, ny + 8, ww, 15, 4);
@@ -1409,7 +1492,16 @@
       const keyText = truncateCanvasText(ctx, r.key, 130);
       ctx.fillText(keyText, nx + 9, ny + NODE_H - 12);
 
-      const visText = r.vis > 0 ? `${r.vis} vis` : (r.always_known ? "Always known" : (r.special_conditions && r.special_conditions.length > 0 ? "Event unlock" : "Free"));
+      let visText = "Free";
+      if (r.is_kami_bundle) {
+        visText = `${(r.kami_total_vis || 0).toLocaleString()} vis`;
+      } else if (r.vis > 0) {
+        visText = `${r.vis} vis`;
+      } else if (r.always_known) {
+        visText = "Always known";
+      } else if (r.condition_category === "warp" || r.condition_category === "event") {
+        visText = "Event unlock";
+      }
       const visW = ctx.measureText(visText).width;
       ctx.fillText(visText, nx + NODE_W - 9 - visW, ny + NODE_H - 12);
 
@@ -1579,12 +1671,16 @@
         const li = document.createElement("li");
         li.className = "search-option";
         li.setAttribute("role", "option");
+        const dispVis = r.is_kami_bundle ? r.kami_total_vis || 0 : r.vis || 0;
+        const dispPrereqs = r.is_kami_bundle
+          ? r.kami_prereq_count || r.parents.length
+          : getEffectiveParents(r, r.key).length;
         li.innerHTML = `
           <div class="search-option-top">
             <span class="search-option-name">${r.name}</span>
             <span class="search-option-tab">${r.tab}</span>
           </div>
-          <div class="search-option-sub">${r.key} · ${r.parents.length} prereqs · ${r.vis} vis</div>
+          <div class="search-option-sub">${r.key} · ${dispPrereqs} prereqs · ${dispVis.toLocaleString()} vis</div>
         `;
         li.addEventListener("click", () => {
           els.searchInput.value = r.name;
@@ -1642,6 +1738,19 @@
       renderSubgraph();
       fitGraphToViewport();
     });
+
+    if (els.collapseKamiCheck) {
+      els.collapseKamiCheck.addEventListener("change", () => {
+        collapseKami = els.collapseKamiCheck.checked;
+        if (targetKey === "KAMI_UNLOCKED") {
+          kamiTargetForceCollapsed = collapseKami;
+        }
+        saveCompletedState();
+        renderSubgraph();
+        renderInspector(selectedKey);
+        fitGraphToViewport();
+      });
+    }
 
     els.btnResetCompleted.addEventListener("click", () => {
       completedKeys.clear();
