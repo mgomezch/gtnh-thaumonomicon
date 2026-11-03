@@ -9,13 +9,14 @@
 
   const PRESET_GOALS = [
     { key: "INFUSION", label: "Infusion" },
+    { key: "ELDRITCHMAJOR", label: "Eldritch Revelation" },
+    { key: "PRIMPEARL", label: "Primordial Pearl" },
+    { key: "OUTERREV", label: "Outer Lands" },
     { key: "ICHOR", label: "Ichor" },
     { key: "ICHORCLOTH_ARMOR", label: "Ichorcloth Armor" },
     { key: "PLACEMENT_MIRROR", label: "Worldshaper's Glass" },
-    { key: "PRIMORDRIALPEARL", label: "Primordial Pearl" },
     { key: "NODECATALYZATION", label: "Node Catalyzation" },
     { key: "voidGolem", label: "Voidling Golems" },
-    { key: "OUTERREV", label: "Outer Lands" },
   ];
 
   const NODE_W = 224;
@@ -567,7 +568,7 @@
       card.style.top = `${pos.y}px`;
       card.dataset.key = r.key;
 
-      // Top bar: Tab + Warp/Scan badges
+      // Top bar: Tab + Warp/Condition/Scan badges
       const topBar = document.createElement("div");
       topBar.className = "node-top-bar";
 
@@ -585,12 +586,19 @@
         wTag.title = `Warp: ${getWarpSeverityLabel(r.warp)}`;
         badges.appendChild(wTag);
       }
-      if (r.scans && r.scans.length > 0) {
-        const sTag = document.createElement("span");
-        sTag.className = "node-scan-tag";
-        sTag.textContent = "Scan";
-        sTag.title = r.scans.map((s) => `${s.type}: ${s.target}`).join(", ");
-        badges.appendChild(sTag);
+      if (r.condition_badge) {
+        const cTag = document.createElement("span");
+        cTag.className = `node-cond-tag cond-${r.condition_category || "scan"}`;
+        cTag.textContent = r.condition_badge;
+        const tooltipParts = [];
+        if (r.notes && r.notes.length > 0) tooltipParts.push(...r.notes);
+        if (r.scans && r.scans.length > 0) {
+          tooltipParts.push(
+            "Scan (any 1): " + r.scans.map((s) => `${s.type}: ${s.target}`).join(", ")
+          );
+        }
+        cTag.title = tooltipParts.join(" | ") || r.condition_badge;
+        badges.appendChild(cTag);
       }
       topBar.appendChild(badges);
       card.appendChild(topBar);
@@ -611,7 +619,16 @@
       botBar.appendChild(keySpan);
 
       const visSpan = document.createElement("span");
-      visSpan.textContent = r.vis > 0 ? `${r.vis} vis` : "Free";
+      if (r.vis > 0) {
+        visSpan.textContent = `${r.vis} vis`;
+      } else if (r.condition_category === "warp" || r.condition_category === "event") {
+        visSpan.textContent = "Event unlock";
+        visSpan.style.color = "#fde68a";
+      } else if (r.always_known) {
+        visSpan.textContent = "Always known";
+      } else {
+        visSpan.textContent = "Free";
+      }
       botBar.appendChild(visSpan);
 
       card.appendChild(botBar);
@@ -665,7 +682,14 @@
     let remainingSteps = 0;
     let totalVis = 0;
     let totalWarp = 0;
-    const scanItems = new Map();
+    const conditionEntries = [];
+    const seenConditionIds = new Set();
+
+    const scanTypePrefix = {
+      SI: "🔍 Scan Item",
+      SE: "👁 Scan Mob",
+      SA: "✧ Scan Aspect",
+    };
 
     for (const k of sg.topoPrereqs) {
       const r = byKey.get(k);
@@ -675,9 +699,32 @@
         remainingSteps++;
         totalVis += r.vis || 0;
         totalWarp += r.warp || 0;
+
+        if (r.notes && r.notes.length > 0 && r.condition_badge) {
+          const cid = `cond:${r.key}`;
+          if (!seenConditionIds.has(cid)) {
+            seenConditionIds.add(cid);
+            conditionEntries.push({
+              key: r.key,
+              label: `${r.condition_badge} · ${r.name}`,
+              category: r.condition_category || "event",
+              tooltip: `${r.name} (${r.key}): ${r.notes.join(" ")}`,
+            });
+          }
+        }
+
         for (const sc of r.scans || []) {
-          const label = `${sc.type}: ${sc.target}`;
-          scanItems.set(label, r.name);
+          const cleanTarget = sc.target.replace(/^Thaumcraft\./, "");
+          const cid = `scan:${sc.type}:${cleanTarget}:${r.key}`;
+          if (!seenConditionIds.has(cid)) {
+            seenConditionIds.add(cid);
+            conditionEntries.push({
+              key: r.key,
+              label: `${scanTypePrefix[sc.type] || sc.type}: ${cleanTarget}`,
+              category: "scan",
+              tooltip: `Required by ${r.name} (${r.key}) — click to focus node`,
+            });
+          }
         }
       }
     }
@@ -687,14 +734,17 @@
     els.statTotalVis.textContent = `${totalVis.toLocaleString()} vis`;
     els.statTotalWarp.textContent = totalWarp.toLocaleString();
 
-    if (scanItems.size > 0) {
+    if (conditionEntries.length > 0) {
       els.scanSummaryBox.hidden = false;
       els.scanSummaryList.innerHTML = "";
-      for (const [scanLabel, rName] of scanItems.entries()) {
+      for (const entry of conditionEntries) {
         const li = document.createElement("li");
-        li.className = "scan-badge";
-        li.textContent = scanLabel;
-        li.title = `Required by ${rName}`;
+        li.className = `scan-badge cond-${entry.category}`;
+        li.textContent = entry.label;
+        li.title = entry.tooltip;
+        li.addEventListener("click", () => {
+          selectNode(entry.key, true);
+        });
         els.scanSummaryList.appendChild(li);
       }
     } else {
@@ -749,6 +799,9 @@
       meta.innerHTML = `<span>${r.tab}</span>`;
       if (r.vis > 0) meta.innerHTML += `<span>· ${r.vis} vis</span>`;
       if (r.warp > 0) meta.innerHTML += `<span style="color:#fda4af;">· ${r.warp} warp</span>`;
+      if (r.condition_badge) {
+        meta.innerHTML += `<span style="color:#fde68a;">· ${r.condition_badge}</span>`;
+      }
       body.appendChild(meta);
 
       li.appendChild(body);
@@ -857,7 +910,15 @@
     els.inspCompletedCheck.checked = isDone;
     els.inspCompletedCheck.disabled = r.always_known;
 
-    els.inspVis.textContent = r.vis > 0 ? `${r.vis} vis` : "0 (Always known / free)";
+    if (r.vis > 0) {
+      els.inspVis.textContent = `${r.vis} vis`;
+    } else if (r.condition_category === "warp" || r.condition_category === "event") {
+      els.inspVis.textContent = "0 (Unlocked by in-game event)";
+    } else if (r.always_known) {
+      els.inspVis.textContent = "0 (Always known)";
+    } else {
+      els.inspVis.textContent = "0 (Free)";
+    }
     els.inspWarp.textContent = getWarpSeverityLabel(r.warp);
     els.inspWarp.style.color = r.warp > 0 ? "#fda4af" : "var(--text-main)";
     els.inspAncestors.textContent = countTransitiveAncestors(r.key).toLocaleString();
@@ -897,9 +958,9 @@
       els.inspScansSection.hidden = false;
       els.inspScansList.innerHTML = "";
       const scanTypeLabels = {
-        SI: "Scan item",
-        SE: "Scan entity",
-        SA: "Scan aspect",
+        SI: "Scan specific item with Thaumometer",
+        SE: "Scan specific mob / entity with Thaumometer",
+        SA: "Scan any item or mob containing this aspect",
       };
       for (const sc of r.scans) {
         const li = document.createElement("li");
@@ -907,7 +968,7 @@
         li.style.cursor = "default";
         li.innerHTML = `
           <div class="rel-item-main">
-            <span class="rel-item-name">${sc.target}</span>
+            <span class="rel-item-name">${sc.target.replace(/^Thaumcraft\./, "")}</span>
             <span class="rel-item-sub">${scanTypeLabels[sc.type] || sc.type}</span>
           </div>
           <span class="scan-badge">${sc.type}</span>
@@ -925,9 +986,15 @@
     if (parents.length === 0) {
       const li = document.createElement("li");
       li.className = "small-muted";
-      li.textContent = r.always_known
-        ? "Always known by default."
-        : "No research prerequisites.";
+      if (r.always_known) {
+        li.textContent = "Always known by default.";
+      } else if (r.notes && r.notes.length > 0) {
+        li.textContent = "Unlocked via special game condition (see above).";
+      } else if (r.scans && r.scans.length > 0) {
+        li.textContent = "Unlocked by scanning the required target above.";
+      } else {
+        li.textContent = "No research prerequisites.";
+      }
       els.inspPrereqsList.appendChild(li);
     } else {
       for (const p of parents) {
@@ -1281,7 +1348,8 @@
 
       // Top bar: Tab tag
       ctx.font = "600 9.5px Inter, sans-serif";
-      const tabText = truncateCanvasText(ctx, r.tab, 130);
+      const tabMaxW = r.condition_badge ? 92 : 130;
+      const tabText = truncateCanvasText(ctx, r.tab, tabMaxW);
       const tabW = ctx.measureText(tabText).width + 10;
       drawRoundedRect(ctx, nx + 9, ny + 8, tabW, 15, 4);
       ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
@@ -1290,16 +1358,31 @@
       ctx.textBaseline = "middle";
       ctx.fillText(tabText, nx + 14, ny + 15.5);
 
-      // Warp / Scan badges on top-right
+      // Warp / Condition badges on top-right
       let rightCursor = nx + NODE_W - 9;
-      if (r.scans && r.scans.length > 0) {
-        const sText = "Scan";
+      if (r.condition_badge) {
+        const sText = truncateCanvasText(ctx, r.condition_badge, 108);
         const sw = ctx.measureText(sText).width + 8;
         rightCursor -= sw;
         drawRoundedRect(ctx, rightCursor, ny + 8, sw, 15, 4);
-        ctx.fillStyle = "rgba(16, 185, 129, 0.22)";
-        ctx.fill();
-        ctx.fillStyle = "#6ee7b7";
+        const cat = r.condition_category || "scan";
+        if (cat === "warp") {
+          ctx.fillStyle = "rgba(244, 63, 94, 0.24)";
+          ctx.fill();
+          ctx.fillStyle = "#fda4af";
+        } else if (cat === "event") {
+          ctx.fillStyle = "rgba(245, 158, 11, 0.24)";
+          ctx.fill();
+          ctx.fillStyle = "#fcd34d";
+        } else if (cat === "kami") {
+          ctx.fillStyle = "rgba(168, 85, 247, 0.26)";
+          ctx.fill();
+          ctx.fillStyle = "#e9d5ff";
+        } else {
+          ctx.fillStyle = "rgba(16, 185, 129, 0.22)";
+          ctx.fill();
+          ctx.fillStyle = "#6ee7b7";
+        }
         ctx.fillText(sText, rightCursor + 4, ny + 15.5);
         rightCursor -= 4;
       }
@@ -1323,10 +1406,10 @@
       // Bottom bar: Key & Vis cost
       ctx.font = "500 9.5px monospace";
       ctx.fillStyle = "#78709c";
-      const keyText = truncateCanvasText(ctx, r.key, 140);
+      const keyText = truncateCanvasText(ctx, r.key, 130);
       ctx.fillText(keyText, nx + 9, ny + NODE_H - 12);
 
-      const visText = r.vis > 0 ? `${r.vis} vis` : "Free";
+      const visText = r.vis > 0 ? `${r.vis} vis` : (r.always_known ? "Always known" : (r.special_conditions && r.special_conditions.length > 0 ? "Event unlock" : "Free"));
       const visW = ctx.measureText(visText).width;
       ctx.fillText(visText, nx + NODE_W - 9 - visW, ny + NODE_H - 12);
 
