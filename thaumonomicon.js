@@ -245,10 +245,18 @@
       if (!r) continue;
       for (const p of r.parents || []) {
         if (activeKeys.has(p.key)) {
+          // If this is an expanded /iskamiunlocked prerequisite that already has
+          // downstream dependents within the Kami prerequisite set, let its chain
+          // flow through those dependents into ICHOR rather than duplicating a redundant
+          // transitive edge from every intermediate node directly to ICHOR.
+          if (p.via_kami && p.kami_leaf === false) {
+            continue;
+          }
           edges.push({
             from: p.key,
             to: k,
             type: p.type, // 'P' or 'Ph'
+            viaKami: Boolean(p.via_kami),
             isUnlockEdge: unlockSet.has(k),
           });
           inParents.get(k).push(p.key);
@@ -925,16 +933,18 @@
         const li = document.createElement("li");
         li.className = "rel-item";
         const badgeCls = p.type === "Ph" ? "badge-ph" : "badge-p";
-        const badgeTitle =
-          p.type === "Ph"
-            ? "Hidden prerequisite (different tab or non-obvious link)"
-            : "Standard prerequisite (same tab)";
+        const badgeText = p.via_kami ? `${p.type} · Kami` : p.type;
+        const badgeTitle = p.via_kami
+          ? "Required by /iskamiunlocked (All Kami Research)"
+          : p.type === "Ph"
+          ? "Hidden prerequisite (different tab or non-obvious link)"
+          : "Standard prerequisite (same tab)";
         li.innerHTML = `
           <div class="rel-item-main">
             <span class="rel-item-name">${pr ? pr.name : p.key}</span>
             <span class="rel-item-sub">${pr ? pr.tab : ""} · ${p.key}</span>
           </div>
-          <span class="rel-badge ${badgeCls}" title="${badgeTitle}">${p.type}</span>
+          <span class="rel-badge ${badgeCls}" title="${badgeTitle}">${badgeText}</span>
         `;
         li.addEventListener("click", () => {
           if (currentSubgraph.positions.has(p.key)) {
