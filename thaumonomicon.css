@@ -386,6 +386,14 @@ body.resizing-sidebars {
   font-size: 0.78rem;
 }
 
+.about-attribution-box p {
+  margin: 0 0 0.45rem;
+}
+
+.about-attribution-box p:last-child {
+  margin-bottom: 0;
+}
+
 .about-dialog-footer {
   display: flex;
   justify-content: flex-end;
