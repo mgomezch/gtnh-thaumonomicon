@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GTNH Thaumonomicon Research Tree Explorer</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="thaumonomicon.css">
 </head>
 <body>
@@ -11,7 +12,9 @@
   <!-- Top Navigation Header -->
   <header class="app-header">
     <div class="brand-group">
-      <div class="brand-icon" aria-hidden="true">✦</div>
+      <div class="brand-icon" aria-hidden="true">
+        <img src="favicon.png" alt="" class="brand-book-img">
+      </div>
       <div>
         <h1>GTNH Thaumonomicon Explorer</h1>
         <p class="subtitle">Interactive research dependency graph &amp; prerequisite solver</p>
@@ -26,15 +29,21 @@
   </header>
 
   <!-- Main Workspace -->
-  <main class="workspace">
+  <main class="workspace" id="app-workspace">
+
+    <!-- Mobile Backdrop for Slide-over Drawers -->
+    <div id="mobile-backdrop" class="mobile-backdrop" hidden></div>
 
     <!-- Left Sidebar: Search, Presets, Filters & Step-by-step Unlocks -->
-    <aside class="sidebar left-sidebar" aria-label="Research search and unlock order">
+    <aside class="sidebar left-sidebar" id="left-sidebar" aria-label="Research search and unlock order">
 
       <!-- Search Box -->
       <section class="panel-section">
         <search>
-          <label for="research-search-input" class="section-label">Search target research</label>
+          <div class="section-header-row">
+            <label for="research-search-input" class="section-label" style="margin-bottom:0;">Search target research</label>
+            <button type="button" id="btn-collapse-left" class="sidebar-collapse-btn" title="Collapse left sidebar ([)" aria-label="Collapse left sidebar">«</button>
+          </div>
           <div class="search-wrap">
             <input
               type="search"
@@ -119,13 +128,22 @@
         <ol id="unlock-order-list" class="unlock-list"></ol>
       </section>
 
+      <!-- Attribution Footer -->
+      <footer class="sidebar-attribution">
+        Book icon: <a href="https://commons.wikimedia.org/wiki/File:Black_open_book.png" target="_blank" rel="noopener">Black open book</a> by Wiki test 0001 via Wikimedia Commons (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>).
+      </footer>
+
     </aside>
+
+    <!-- Left Sidebar Drag Resizer -->
+    <div id="left-resizer" class="sidebar-resizer resizer-left" role="separator" aria-orientation="vertical" title="Drag to resize left sidebar (double-click to reset)"></div>
 
     <!-- Center Interactive Tree Viewport -->
     <section class="canvas-stage" aria-label="Interactive dependency graph">
 
-      <!-- Floating Top-Left Legend & Breadcrumb -->
+      <!-- Floating Top-Left Restore Button + Legend -->
       <div class="canvas-overlay-top">
+        <button type="button" id="btn-expand-left" class="sidebar-restore-btn" title="Open search &amp; checklist sidebar ([)" hidden>☰ Search &amp; list »</button>
         <div class="legend-bar">
           <span class="legend-item"><span class="legend-dot dot-root"></span>Always known / root</span>
           <span class="legend-item"><span class="legend-dot dot-prereq"></span>Prerequisite</span>
@@ -134,6 +152,11 @@
           <span class="legend-item"><span class="legend-line line-solid"></span>Same-tab (P)</span>
           <span class="legend-item"><span class="legend-line line-dashed"></span>Cross-tab hidden (Ph)</span>
         </div>
+      </div>
+
+      <!-- Floating Top-Right Restore Button -->
+      <div class="canvas-overlay-top-right">
+        <button type="button" id="btn-expand-right" class="sidebar-restore-btn" title="Open research inspector sidebar (])" hidden>« Inspector</button>
       </div>
 
       <!-- Floating Bottom-Right Viewport Controls -->
@@ -158,7 +181,7 @@
         class="pan-viewport"
         tabindex="0"
         role="region"
-        aria-label="Interactive Thaumonomicon prerequisite tree canvas. Drag with mouse to pan, scroll wheel to zoom, or use arrow keys."
+        aria-label="Interactive Thaumonomicon prerequisite tree canvas. Drag with mouse or touch to pan, scroll wheel or pinch to zoom, or use arrow keys."
       >
         <div id="tree-surface" class="pan-surface">
           <svg id="tree-edges-svg" class="edges-svg" aria-hidden="true"></svg>
@@ -168,12 +191,18 @@
 
     </section>
 
+    <!-- Right Sidebar Drag Resizer -->
+    <div id="right-resizer" class="sidebar-resizer resizer-right" role="separator" aria-orientation="vertical" title="Drag to resize right sidebar (double-click to reset)"></div>
+
     <!-- Right Sidebar: Detailed Node Inspector -->
     <aside class="sidebar right-sidebar" id="inspector-sidebar" aria-label="Selected research details">
       <section class="panel-section inspector-content" id="inspector-panel">
         <div class="section-header-row">
           <span class="tab-badge" id="insp-tab">Tab</span>
-          <button type="button" id="btn-make-target" class="btn-primary-sm" title="Set this research as the primary tree target">Set as root target</button>
+          <div class="inspector-header-actions">
+            <button type="button" id="btn-make-target" class="btn-primary-sm" title="Set this research as the primary tree target">Set as root target</button>
+            <button type="button" id="btn-collapse-right" class="sidebar-collapse-btn" title="Collapse inspector sidebar (])" aria-label="Collapse inspector sidebar">»</button>
+          </div>
         </div>
 
         <h2 class="insp-title" id="insp-name">Select a research</h2>
@@ -240,6 +269,19 @@
     </aside>
 
   </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav id="mobile-tab-bar" class="mobile-tab-bar" aria-label="Mobile view switcher">
+    <button type="button" class="mobile-tab-btn" data-mobile-panel="left">
+      <span>🔍 Search &amp; list</span>
+    </button>
+    <button type="button" class="mobile-tab-btn active" data-mobile-panel="canvas">
+      <span>✦ Tree graph</span>
+    </button>
+    <button type="button" class="mobile-tab-btn" data-mobile-panel="right">
+      <span>📖 Inspector</span>
+    </button>
+  </nav>
 
   <script src="thaumonomicon_data.js"></script>
   <script src="thaumonomicon.js"></script>

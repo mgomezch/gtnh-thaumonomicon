@@ -42,6 +42,13 @@
   let kamiTargetForceCollapsed = false;
   let completedKeys = new Set();
 
+  // Sidebar & Mobile layout state
+  let leftSidebarWidth = 340;
+  let rightSidebarWidth = 340;
+  let leftCollapsed = false;
+  let rightCollapsed = false;
+  let mobileActivePanel = "canvas"; // 'left' | 'canvas' | 'right'
+
   // Current rendered graph state
   let currentSubgraph = {
     nodes: [],
@@ -55,6 +62,10 @@
   // DOM Elements
   const els = {};
 
+  function isMobileViewport() {
+    return window.innerWidth <= 860;
+  }
+
   function loadCompletedState() {
     try {
       const saved = localStorage.getItem("gtnh_thaumonomicon_completed_v1");
@@ -67,6 +78,14 @@
       const savedCollapse = localStorage.getItem("gtnh_thaumonomicon_collapse_kami_v1");
       if (savedCollapse !== null) {
         collapseKami = savedCollapse === "true";
+      }
+      const savedLayout = localStorage.getItem("gtnh_thaumonomicon_layout_v1");
+      if (savedLayout) {
+        const obj = JSON.parse(savedLayout);
+        if (typeof obj.leftW === "number") leftSidebarWidth = Math.max(220, Math.min(620, obj.leftW));
+        if (typeof obj.rightW === "number") rightSidebarWidth = Math.max(220, Math.min(620, obj.rightW));
+        if (typeof obj.leftCollapsed === "boolean") leftCollapsed = obj.leftCollapsed;
+        if (typeof obj.rightCollapsed === "boolean") rightCollapsed = obj.rightCollapsed;
       }
     } catch (_) {
       completedKeys = new Set();
@@ -84,6 +103,76 @@
         String(collapseKami)
       );
     } catch (_) {}
+  }
+
+  function saveLayoutState() {
+    try {
+      localStorage.setItem(
+        "gtnh_thaumonomicon_layout_v1",
+        JSON.stringify({
+          leftW: leftSidebarWidth,
+          rightW: rightSidebarWidth,
+          leftCollapsed,
+          rightCollapsed,
+        })
+      );
+    } catch (_) {}
+  }
+
+  function applySidebarLayout() {
+    document.documentElement.style.setProperty("--left-sidebar-w", `${leftSidebarWidth}px`);
+    document.documentElement.style.setProperty("--right-sidebar-w", `${rightSidebarWidth}px`);
+
+    if (els.leftSidebar) {
+      els.leftSidebar.classList.toggle("collapsed", leftCollapsed);
+    }
+    if (els.rightSidebar) {
+      els.rightSidebar.classList.toggle("collapsed", rightCollapsed);
+    }
+    if (els.leftResizer) {
+      els.leftResizer.classList.toggle("hidden", leftCollapsed);
+    }
+    if (els.rightResizer) {
+      els.rightResizer.classList.toggle("hidden", rightCollapsed);
+    }
+    if (els.btnExpandLeft) {
+      els.btnExpandLeft.hidden = !leftCollapsed;
+    }
+    if (els.btnExpandRight) {
+      els.btnExpandRight.hidden = !rightCollapsed;
+    }
+  }
+
+  function setSidebarCollapsed(side, collapsed) {
+    if (isMobileViewport()) {
+      setMobilePanel("canvas");
+      return;
+    }
+    if (side === "left") {
+      leftCollapsed = collapsed;
+    } else {
+      rightCollapsed = collapsed;
+    }
+    applySidebarLayout();
+    saveLayoutState();
+  }
+
+  function setMobilePanel(panel) {
+    mobileActivePanel = panel;
+    if (els.leftSidebar) {
+      els.leftSidebar.classList.toggle("mobile-open", panel === "left");
+    }
+    if (els.rightSidebar) {
+      els.rightSidebar.classList.toggle("mobile-open", panel === "right");
+    }
+    if (els.mobileBackdrop) {
+      els.mobileBackdrop.hidden = panel === "canvas";
+    }
+    if (els.mobileTabBar) {
+      els.mobileTabBar.querySelectorAll(".mobile-tab-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.mobilePanel === panel);
+      });
+    }
   }
 
   function getEffectiveParents(r, rootTargetKey) {
@@ -139,6 +228,17 @@
 
   function cacheDom() {
     els.globalStatsPill = document.getElementById("global-stats-pill");
+    els.leftSidebar = document.getElementById("left-sidebar");
+    els.rightSidebar = document.getElementById("inspector-sidebar");
+    els.leftResizer = document.getElementById("left-resizer");
+    els.rightResizer = document.getElementById("right-resizer");
+    els.btnCollapseLeft = document.getElementById("btn-collapse-left");
+    els.btnCollapseRight = document.getElementById("btn-collapse-right");
+    els.btnExpandLeft = document.getElementById("btn-expand-left");
+    els.btnExpandRight = document.getElementById("btn-expand-right");
+    els.mobileTabBar = document.getElementById("mobile-tab-bar");
+    els.mobileBackdrop = document.getElementById("mobile-backdrop");
+
     els.searchInput = document.getElementById("research-search-input");
     els.btnClearSearch = document.getElementById("btn-clear-search");
     els.searchDropdown = document.getElementById("search-results-dropdown");
@@ -915,6 +1015,9 @@
     renderInspector(key);
 
     if (panToNode) {
+      if (isMobileViewport()) {
+        setMobilePanel("canvas");
+      }
       centerOnNode(key);
     }
   }
@@ -925,6 +1028,10 @@
     selectedKey = key;
     if (key === "KAMI_UNLOCKED") {
       kamiTargetForceCollapsed = false;
+    }
+
+    if (isMobileViewport()) {
+      setMobilePanel("canvas");
     }
 
     // Update URL hash without scrolling
@@ -1569,38 +1676,80 @@
 
   function setupCanvasInteractions() {
     const vp = els.viewport;
-    let pointerState = null;
+    const activePointers = new Map();
+    let lastPinchDist = null;
+    let lastPinchMid = null;
 
-    // Mouse / touch drag to pan via scrollLeft & scrollTop
     vp.addEventListener("pointerdown", (e) => {
       if (e.target.closest(".tree-node")) return;
+      if (e.pointerType === "mouse" && e.button !== 0) return;
       const rect = vp.getBoundingClientRect();
       if (
-        !e.isPrimary ||
-        e.button !== 0 ||
         e.clientX - rect.left - vp.clientLeft >= vp.clientWidth ||
         e.clientY - rect.top - vp.clientTop >= vp.clientHeight
       ) {
         return;
       }
-      pointerState = { x: e.clientX, y: e.clientY };
+      activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       vp.classList.add("dragging");
-      vp.setPointerCapture(e.pointerId);
+      try {
+        vp.setPointerCapture(e.pointerId);
+      } catch (_) {}
+
+      if (activePointers.size === 2) {
+        const pts = Array.from(activePointers.values());
+        lastPinchDist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+        lastPinchMid = {
+          x: (pts[0].x + pts[1].x) / 2,
+          y: (pts[0].y + pts[1].y) / 2,
+        };
+      } else {
+        lastPinchDist = null;
+        lastPinchMid = null;
+      }
     });
 
     vp.addEventListener("pointermove", (e) => {
-      if (!pointerState) return;
-      vp.scrollLeft -= e.clientX - pointerState.x;
-      vp.scrollTop -= e.clientY - pointerState.y;
-      pointerState = { x: e.clientX, y: e.clientY };
+      if (!activePointers.has(e.pointerId)) return;
+      const prev = activePointers.get(e.pointerId);
+      const cur = { x: e.clientX, y: e.clientY };
+      activePointers.set(e.pointerId, cur);
+
+      if (activePointers.size === 1) {
+        vp.scrollLeft -= cur.x - prev.x;
+        vp.scrollTop -= cur.y - prev.y;
+      } else if (activePointers.size === 2) {
+        const pts = Array.from(activePointers.values());
+        const dist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+        const mid = {
+          x: (pts[0].x + pts[1].x) / 2,
+          y: (pts[0].y + pts[1].y) / 2,
+        };
+        if (lastPinchMid) {
+          vp.scrollLeft -= mid.x - lastPinchMid.x;
+          vp.scrollTop -= mid.y - lastPinchMid.y;
+        }
+        if (lastPinchDist && lastPinchDist > 8 && dist > 8) {
+          const factor = dist / lastPinchDist;
+          setZoom(zoomScale * factor, mid.x, mid.y);
+        }
+        lastPinchDist = dist;
+        lastPinchMid = mid;
+      }
     });
 
-    const endPan = () => {
-      pointerState = null;
-      vp.classList.remove("dragging");
+    const endPointer = (e) => {
+      activePointers.delete(e.pointerId);
+      if (activePointers.size < 2) {
+        lastPinchDist = null;
+        lastPinchMid = null;
+      }
+      if (activePointers.size === 0) {
+        vp.classList.remove("dragging");
+      }
     };
-    vp.addEventListener("pointerup", endPan);
-    vp.addEventListener("pointercancel", endPan);
+    vp.addEventListener("pointerup", endPointer);
+    vp.addEventListener("pointercancel", endPointer);
 
     // Wheel zoom around cursor
     vp.addEventListener(
@@ -1612,6 +1761,57 @@
       },
       { passive: false }
     );
+  }
+
+  function setupSidebarResizing() {
+    const bindResizer = (resizerEl, side) => {
+      if (!resizerEl) return;
+      let dragging = false;
+
+      resizerEl.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        dragging = true;
+        resizerEl.classList.add("active");
+        document.body.classList.add("resizing-sidebars");
+        resizerEl.setPointerCapture(e.pointerId);
+      });
+
+      resizerEl.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        if (side === "left") {
+          const newW = Math.max(220, Math.min(620, Math.round(e.clientX)));
+          leftSidebarWidth = newW;
+        } else {
+          const newW = Math.max(220, Math.min(620, Math.round(window.innerWidth - e.clientX)));
+          rightSidebarWidth = newW;
+        }
+        applySidebarLayout();
+      });
+
+      const endResize = () => {
+        if (!dragging) return;
+        dragging = false;
+        resizerEl.classList.remove("active");
+        document.body.classList.remove("resizing-sidebars");
+        saveLayoutState();
+      };
+      resizerEl.addEventListener("pointerup", endResize);
+      resizerEl.addEventListener("pointercancel", endResize);
+
+      resizerEl.addEventListener("dblclick", () => {
+        if (side === "left") {
+          leftSidebarWidth = 340;
+        } else {
+          rightSidebarWidth = 340;
+        }
+        applySidebarLayout();
+        saveLayoutState();
+      });
+    };
+
+    bindResizer(els.leftResizer, "left");
+    bindResizer(els.rightResizer, "right");
   }
 
   /* ==========================================================================
@@ -1752,6 +1952,51 @@
       });
     }
 
+    if (els.btnCollapseLeft) {
+      els.btnCollapseLeft.addEventListener("click", () => setSidebarCollapsed("left", true));
+    }
+    if (els.btnExpandLeft) {
+      els.btnExpandLeft.addEventListener("click", () => setSidebarCollapsed("left", false));
+    }
+    if (els.btnCollapseRight) {
+      els.btnCollapseRight.addEventListener("click", () => setSidebarCollapsed("right", true));
+    }
+    if (els.btnExpandRight) {
+      els.btnExpandRight.addEventListener("click", () => setSidebarCollapsed("right", false));
+    }
+
+    if (els.mobileTabBar) {
+      els.mobileTabBar.querySelectorAll(".mobile-tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetPanel = btn.dataset.mobilePanel || "canvas";
+          // Toggle back to canvas if tapping the already open drawer tab
+          if (targetPanel !== "canvas" && mobileActivePanel === targetPanel) {
+            setMobilePanel("canvas");
+          } else {
+            setMobilePanel(targetPanel);
+          }
+        });
+      });
+    }
+
+    if (els.mobileBackdrop) {
+      els.mobileBackdrop.addEventListener("click", () => setMobilePanel("canvas"));
+    }
+
+    document.addEventListener("keydown", (e) => {
+      const tag = (e.target && e.target.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if (e.key === "[") {
+        setSidebarCollapsed("left", !leftCollapsed);
+      } else if (e.key === "]") {
+        setSidebarCollapsed("right", !rightCollapsed);
+      } else if (e.key === "f" || e.key === "F") {
+        fitGraphToViewport();
+      } else if (e.key === "c" || e.key === "C") {
+        centerOnNode(targetKey);
+      }
+    });
+
     els.btnResetCompleted.addEventListener("click", () => {
       completedKeys.clear();
       saveCompletedState();
@@ -1799,9 +2044,11 @@
   async function boot() {
     cacheDom();
     loadCompletedState();
+    applySidebarLayout();
     await initData();
     populateTabsAndPresets();
     setupCanvasInteractions();
+    setupSidebarResizing();
     setupUIEvents();
 
     // Check URL hash for initial target research
