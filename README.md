@@ -12,4 +12,4 @@ Latest Free Software Foundation published General Public License at the time of 
 
 - Book icon (`favicon.png`): ["Black open book"](https://commons.wikimedia.org/wiki/File:Black_open_book.png) by whoever created that (the username seems to be just some test placeholder so I'm not sure), via Wikimedia Commons, licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
-- The actual data for the graph: see GTNH Wiki link above for terms.
+- The actual data for the graph: see GTNH Wiki link above for terms.  Last I checked, it's also CC BY-SA 4.0 by the GTNH Wiki authors.
