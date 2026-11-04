@@ -145,6 +145,32 @@ body.resizing-sidebars {
   background: rgba(168, 85, 247, 0.12);
 }
 
+.about-icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(168, 85, 247, 0.14);
+  color: #e9d5ff;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.about-icon-btn:hover {
+  color: #fde68a;
+  border-color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.2);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
 /* Main Workspace Layout */
 .workspace {
   flex: 1;
@@ -227,22 +253,145 @@ body.resizing-sidebars {
   gap: 0.4rem;
 }
 
-.sidebar-attribution {
-  margin-top: auto;
-  padding: 0.7rem 1rem;
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border-subtle);
-  line-height: 1.45;
+/* Floating About Dialog */
+.about-dialog {
+  padding: 0;
+  border: 1px solid var(--border-focus);
+  border-radius: 12px;
+  background: var(--bg-panel);
+  color: var(--text-main);
+  max-width: 480px;
+  width: calc(100vw - 2rem);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(168, 85, 247, 0.25);
 }
 
-.sidebar-attribution a {
+.about-dialog::backdrop {
+  background: rgba(6, 4, 14, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.about-dialog-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 1.15rem;
+  background: linear-gradient(90deg, #16112b 0%, #1f173d 100%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.about-dialog-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.about-brand-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.about-brand-icon .brand-book-img {
+  width: 18px;
+  height: 18px;
+}
+
+.about-dialog-header h2 {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #fde68a;
+}
+
+.about-close-btn {
+  background: transparent;
+  border: 1px solid transparent;
   color: var(--text-secondary);
+  font-size: 1.25rem;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s ease;
+}
+
+.about-close-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-card-hover);
+  border-color: var(--border-subtle);
+}
+
+.about-dialog-body {
+  padding: 1rem 1.15rem;
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.about-dialog-body p {
+  margin: 0 0 0.85rem;
+}
+
+.about-dialog-body h3 {
+  margin: 0.9rem 0 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+}
+
+.about-dialog-body a {
+  color: #c4b5fd;
   text-decoration: underline;
 }
 
-.sidebar-attribution a:hover {
+.about-dialog-body a:hover {
   color: #fde68a;
+}
+
+.about-shortcuts-list {
+  margin: 0 0 0.85rem;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.about-shortcuts-list code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: #fde68a;
+}
+
+.about-attribution-box {
+  margin: 0 !important;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+}
+
+.about-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75rem 1.15rem;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(11, 9, 20, 0.45);
 }
 
 .panel-section {

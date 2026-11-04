@@ -25,6 +25,7 @@
     <nav class="header-nav" aria-label="Application navigation">
       <a href="https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet" target="_blank" rel="noopener" class="nav-link">Wiki cheatsheet ↗</a>
       <a href="https://github.com/mgomezch/gtnh-thaumonomicon" target="_blank" rel="noopener" class="nav-link">GitHub ↗</a>
+      <button type="button" id="btn-open-about" class="about-icon-btn" title="About &amp; attribution (?)" aria-label="About and attribution">?</button>
     </nav>
   </header>
 
@@ -127,11 +128,6 @@
         <p class="helper-note">Click any item to focus its node in the tree. Check the box to mark a research as already unlocked.</p>
         <ol id="unlock-order-list" class="unlock-list"></ol>
       </section>
-
-      <!-- Attribution Footer -->
-      <footer class="sidebar-attribution">
-        Book icon: <a href="https://commons.wikimedia.org/wiki/File:Black_open_book.png" target="_blank" rel="noopener">Black open book</a> by Wiki test 0001 via Wikimedia Commons (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>).
-      </footer>
 
     </aside>
 
@@ -282,6 +278,49 @@
       <span>📖 Inspector</span>
     </button>
   </nav>
+
+  <!-- About & Attribution Floating Dialog -->
+  <dialog id="about-dialog" class="about-dialog" aria-labelledby="about-dialog-title">
+    <div class="about-dialog-card">
+      <div class="about-dialog-header">
+        <div class="about-dialog-title-wrap">
+          <div class="brand-icon about-brand-icon" aria-hidden="true">
+            <img src="favicon.png" alt="" class="brand-book-img">
+          </div>
+          <h2 id="about-dialog-title">About GTNH Thaumonomicon explorer</h2>
+        </div>
+        <button type="button" id="btn-close-about" class="about-close-btn" title="Close dialog (Esc)" aria-label="Close dialog">×</button>
+      </div>
+      <div class="about-dialog-body">
+        <p>
+          Interactive dependency tree explorer, prerequisite checklist, and unlock solver for
+          <strong>GT New Horizons</strong> Thaumcraft 4 &amp; addon researches, parsed from the
+          <a href="https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet" target="_blank" rel="noopener">GTNH Wiki Research Cheatsheet</a>.
+        </p>
+
+        <h3>Navigation &amp; shortcuts</h3>
+        <ul class="about-shortcuts-list">
+          <li><strong>Drag / scroll wheel / pinch:</strong> Pan and zoom the research tree canvas</li>
+          <li><strong>Click node:</strong> Inspect details, required scans, warp, and unlock conditions</li>
+          <li><strong>Double-click node:</strong> Set research as the active target tree</li>
+          <li><strong><code>[</code> and <code>]</code>:</strong> Collapse or expand left and right sidebars</li>
+          <li><strong><code>F</code> / <code>C</code>:</strong> Fit full graph to screen / center on target node</li>
+          <li><strong><code>?</code>:</strong> Open or close this about dialog</li>
+        </ul>
+
+        <h3>Credits &amp; attribution</h3>
+        <p class="about-attribution-box">
+          Book icon (<a href="https://commons.wikimedia.org/wiki/File:Black_open_book.png" target="_blank" rel="noopener">Black_open_book.png</a>)
+          by <a href="https://commons.wikimedia.org/wiki/User:Wiki_test_0001" target="_blank" rel="noopener">Wiki test 0001</a>
+          via Wikimedia Commons, licensed under
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
+        </p>
+      </div>
+      <div class="about-dialog-footer">
+        <button type="button" id="btn-dismiss-about" class="btn-primary-sm">Close</button>
+      </div>
+    </div>
+  </dialog>
 
   <script src="thaumonomicon_data.js"></script>
   <script src="thaumonomicon.js"></script>

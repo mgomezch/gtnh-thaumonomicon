@@ -238,6 +238,10 @@
     els.btnExpandRight = document.getElementById("btn-expand-right");
     els.mobileTabBar = document.getElementById("mobile-tab-bar");
     els.mobileBackdrop = document.getElementById("mobile-backdrop");
+    els.btnOpenAbout = document.getElementById("btn-open-about");
+    els.aboutDialog = document.getElementById("about-dialog");
+    els.btnCloseAbout = document.getElementById("btn-close-about");
+    els.btnDismissAbout = document.getElementById("btn-dismiss-about");
 
     els.searchInput = document.getElementById("research-search-input");
     els.btnClearSearch = document.getElementById("btn-clear-search");
@@ -1983,10 +1987,51 @@
       els.mobileBackdrop.addEventListener("click", () => setMobilePanel("canvas"));
     }
 
+    const openAboutDialog = () => {
+      if (!els.aboutDialog) return;
+      if (typeof els.aboutDialog.showModal === "function") {
+        if (!els.aboutDialog.open) els.aboutDialog.showModal();
+      } else {
+        els.aboutDialog.setAttribute("open", "");
+      }
+    };
+
+    const closeAboutDialog = () => {
+      if (!els.aboutDialog) return;
+      if (typeof els.aboutDialog.close === "function") {
+        if (els.aboutDialog.open) els.aboutDialog.close();
+      } else {
+        els.aboutDialog.removeAttribute("open");
+      }
+    };
+
+    if (els.btnOpenAbout) {
+      els.btnOpenAbout.addEventListener("click", openAboutDialog);
+    }
+    if (els.btnCloseAbout) {
+      els.btnCloseAbout.addEventListener("click", closeAboutDialog);
+    }
+    if (els.btnDismissAbout) {
+      els.btnDismissAbout.addEventListener("click", closeAboutDialog);
+    }
+    if (els.aboutDialog) {
+      els.aboutDialog.addEventListener("click", (e) => {
+        if (e.target === els.aboutDialog) {
+          closeAboutDialog();
+        }
+      });
+    }
+
     document.addEventListener("keydown", (e) => {
       const tag = (e.target && e.target.tagName) || "";
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-      if (e.key === "[") {
+      if (e.key === "?") {
+        if (els.aboutDialog && els.aboutDialog.open) {
+          closeAboutDialog();
+        } else {
+          openAboutDialog();
+        }
+      } else if (e.key === "[") {
         setSidebarCollapsed("left", !leftCollapsed);
       } else if (e.key === "]") {
         setSidebarCollapsed("right", !rightCollapsed);
