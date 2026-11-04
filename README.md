@@ -1,18 +1,13 @@
-# GTNH Thaumonomicon Research Tree Explorer
+# GTNH Thaumonomicon research tree explorer
 
-Interactive dependency graph and prerequisite solver for all **1,134 Thaumcraft researches** across all **27 tabs** in **GregTech: New Horizons (GTNH)**, parsed from the [GTNH Wiki Thaumonomicon Research Cheatsheet](https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet).
+Web dependency graph explorer for Thaumcraft 4 research in GregTech: New Horizons (GTNH, parsed from the [GTNH Wiki Thaumonomicon Research Cheatsheet](https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet).
 
-**Live Web App:** <https://mgomezch.github.io/gtnh-thaumonomicon/>
+Note that everything in this repository other than this README (and some Creative Commons assets) was generated with Antigravity.  This is a vibecoded project
 
-## Features
+Try it out here: <https://mgomezch.github.io/gtnh-thaumonomicon/>
 
-- **Instant Fuzzy Search & Filtering**: Search by research name, unique key, Thaumonomicon tab, or puzzle anchor aspect.
-- **Full Prerequisite DAG Visualization**: Automatically computes topological ranks and reduces edge crossings for any target research, distinguishing standard same-tab prerequisites (`P`) from hidden cross-tab links (`Ph`) and downstream unlocks.
-- **KAMI Prerequisite Expansion & Single-Box Toggle**: Switch between treating `/iskamiunlocked` (`All Kami Research`) as a single summary box or expanding all 274 underlying pre-Ichor researches across Basic Information, Thaumaturgy, Alchemy, Artifice, Golemancy, and Thaumic Tinkering.
-- **Special Unlock Conditions & Scan Clues**: Surfaces Warp event thresholds (`BATHSALTS` > 10, `ELDRITCHMINOR` > 25, `ELDRITCHMAJOR` > 50), item/portal triggers (*Crimson Rites*, *Outer Lands* portal, *Primal Charm*, *Profane Wand*), and all 52 Thaumometer scan requirements (`SI`, `SE`, `SA`).
-- **2D Mouse & Touch Pan, Pinch-Zoom & Full-Graph PNG Export**: Smooth click-and-drag or touch panning, cursor-centered wheel/pinch zoom, collapsible and drag-resizable desktop sidebars, mobile drawer navigation, and one-click full-graph PNG download/clipboard export.
-- **Ordered Unlock Checklist & Cost Calculator**: Lists the exact topological unlock sequence from *Always Known* roots to the target research, tracking remaining steps, total Research Completer vis cost, and cumulative warp severity with `localStorage` persistence.
+## License
 
-## Attribution
+Latest Free Software Foundation published General Public License at the time of each commit, or newer, except:
 
-- Book icon (`favicon.png`): ["Black open book"](https://commons.wikimedia.org/wiki/File:Black_open_book.png) by **Wiki test 0001** via Wikimedia Commons, licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+- Book icon (`favicon.png`): ["Black open book"](https://commons.wikimedia.org/wiki/File:Black_open_book.png) by whoever created that (the username seems to be just some test placeholder so I'm not sure), via Wikimedia Commons, licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
