@@ -1,8 +1,8 @@
 # GTNH Thaumonomicon research tree explorer
 
-Web dependency graph explorer for Thaumcraft 4 research in GregTech: New Horizons (GTNH, parsed from the [GTNH Wiki Thaumonomicon Research Cheatsheet](https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet).
+Web dependency graph explorer for Thaumcraft 4 research in GregTech: New Horizons (GTNH), using data parsed from the [GTNH Wiki Thaumonomicon Research Cheatsheet](https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet).
 
-Note that everything in this repository other than this README (and some Creative Commons assets) was generated with Antigravity.  This is a vibecoded project
+Note that everything in this repository other than this README (and some Creative Commons assets) was generated with Antigravity.  This is a vibecoded project.  Also, this project is not affiliated with the GTNH project; this is a personal project by me, Manuel Gómez.  "GTNH" in the title means "for use by GTNH players", not "part of the GTNH project", in case that's somehow not clear.
 
 Try it out here: <https://mgomezch.github.io/gtnh-thaumonomicon/>
 
