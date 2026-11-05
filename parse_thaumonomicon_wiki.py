@@ -388,11 +388,26 @@ def parse_cheatsheet(raw_html: str) -> Dict[str, Any]:
                     entry["is_kami_bundle_edge"] = True
                 by_key[pk]["unlocks"].append(entry)
 
+    icon_manifest_path = Path(__file__).resolve().parent.parent / "data" / "thaumonomicon_icon_paths.json"
+    tab_icons: Dict[str, Any] = {}
+    github_bases: Dict[str, str] = {}
+    if icon_manifest_path.exists():
+        icon_manifest = json.loads(icon_manifest_path.read_text(encoding="utf-8"))
+        tab_icons = icon_manifest.get("tab_icons", {})
+        github_bases = icon_manifest.get("github_bases", {})
+        res_icons = icon_manifest.get("research_icons", {})
+        for r in researches:
+            ic = res_icons.get(r["key"])
+            if ic:
+                r["icon"] = ic
+
     return {
         "source_url": WIKI_URL,
         "total_researches": len(researches),
         "total_tabs": len(tabs),
         "tabs": tabs,
+        "tab_icons": tab_icons,
+        "github_bases": github_bases,
         "kami_prereq_keys": kami_prereq_keys,
         "researches": researches,
     }

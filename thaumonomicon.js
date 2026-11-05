@@ -243,6 +243,27 @@
     els.btnCloseAbout = document.getElementById("btn-close-about");
     els.btnDismissAbout = document.getElementById("btn-dismiss-about");
 
+    els.btnOpenTextures = document.getElementById("btn-open-textures");
+    els.texturesStatusDot = document.getElementById("textures-status-dot");
+    els.texturesBtnLabel = document.getElementById("textures-btn-label");
+    els.texturesDialog = document.getElementById("textures-dialog");
+    els.btnCloseTextures = document.getElementById("btn-close-textures");
+    els.btnDismissTextures = document.getElementById("btn-dismiss-textures");
+    els.texturesCacheSummary = document.getElementById("textures-cache-summary");
+    els.texturesCacheBadge = document.getElementById("textures-cache-badge");
+    els.texturesProgressTrack = document.getElementById("textures-progress-track");
+    els.texturesProgressFill = document.getElementById("textures-progress-fill");
+    els.texturesStatusDetail = document.getElementById("textures-status-detail");
+    els.texturesDropzone = document.getElementById("textures-dropzone");
+    els.btnPickModsDir = document.getElementById("btn-pick-mods-dir");
+    els.btnPickJarFiles = document.getElementById("btn-pick-jar-files");
+    els.inputModsDir = document.getElementById("input-mods-dir");
+    els.inputJarFiles = document.getElementById("input-jar-files");
+    els.checkFetchMissingOnline = document.getElementById("check-fetch-missing-online");
+    els.btnFetchGithubTextures = document.getElementById("btn-fetch-github-textures");
+    els.btnReloadTextures = document.getElementById("btn-reload-textures");
+    els.btnClearTextures = document.getElementById("btn-clear-textures");
+
     els.searchInput = document.getElementById("research-search-input");
     els.btnClearSearch = document.getElementById("btn-clear-search");
     els.searchDropdown = document.getElementById("search-results-dropdown");
@@ -279,6 +300,7 @@
 
     els.inspTab = document.getElementById("insp-tab");
     els.btnMakeTarget = document.getElementById("btn-make-target");
+    els.inspIconImg = document.getElementById("insp-icon-img");
     els.inspName = document.getElementById("insp-name");
     els.inspKey = document.getElementById("insp-key");
     els.btnCopyKey = document.getElementById("insp-copy-key") || document.getElementById("btn-copy-key");
@@ -304,27 +326,41 @@
       els.collapseKamiCheck.checked = collapseKami;
     }
 
-    // Populate tabs dropdown
-    const countsByTab = new Map();
-    for (const r of allResearches) {
-      countsByTab.set(r.tab, (countsByTab.get(r.tab) || 0) + 1);
-    }
-    for (const tab of rawData.tabs || []) {
-      const opt = document.createElement("option");
-      opt.value = tab;
-      opt.textContent = `${tab} (${countsByTab.get(tab) || 0})`;
-      els.tabFilterSelect.appendChild(opt);
+    // Populate tabs dropdown (only if not yet populated)
+    if (els.tabFilterSelect.options.length <= 1) {
+      const countsByTab = new Map();
+      for (const r of allResearches) {
+        countsByTab.set(r.tab, (countsByTab.get(r.tab) || 0) + 1);
+      }
+      for (const tab of rawData.tabs || []) {
+        const opt = document.createElement("option");
+        opt.value = tab;
+        opt.textContent = `${tab} (${countsByTab.get(tab) || 0})`;
+        els.tabFilterSelect.appendChild(opt);
+      }
     }
 
     // Populate preset chips
     els.presetChipsContainer.innerHTML = "";
     for (const preset of PRESET_GOALS) {
-      if (!byKey.has(preset.key)) continue;
+      const r = byKey.get(preset.key);
+      if (!r) continue;
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "preset-chip";
+      if (preset.key === targetKey) btn.classList.add("active");
       btn.dataset.key = preset.key;
-      btn.textContent = preset.label;
+      const iconUrl = getResearchIconDataUrl(r);
+      if (iconUrl) {
+        const img = document.createElement("img");
+        img.className = "preset-chip-icon";
+        img.src = iconUrl;
+        img.alt = "";
+        btn.appendChild(img);
+      }
+      const span = document.createElement("span");
+      span.textContent = preset.label;
+      btn.appendChild(span);
       btn.addEventListener("click", () => {
         setTargetResearch(preset.key, true);
       });
@@ -754,11 +790,24 @@
       topBar.appendChild(badges);
       card.appendChild(topBar);
 
-      // Middle: Research Name
+      // Middle: Icon + Research Name
+      const mainRow = document.createElement("div");
+      mainRow.className = "node-main-row";
+
+      const iconUrl = getResearchIconDataUrl(r);
+      if (iconUrl) {
+        const iconImg = document.createElement("img");
+        iconImg.className = "node-icon-img";
+        iconImg.src = iconUrl;
+        iconImg.alt = "";
+        mainRow.appendChild(iconImg);
+      }
+
       const titleEl = document.createElement("div");
       titleEl.className = "node-title";
       titleEl.textContent = r.name;
-      card.appendChild(titleEl);
+      mainRow.appendChild(titleEl);
+      card.appendChild(mainRow);
 
       // Bottom bar: Key + Vis cost
       const botBar = document.createElement("div");
@@ -953,6 +1002,15 @@
       });
       li.appendChild(checkbox);
 
+      const iconUrl = getResearchIconDataUrl(r);
+      if (iconUrl) {
+        const iconImg = document.createElement("img");
+        iconImg.className = "unlock-item-icon";
+        iconImg.src = iconUrl;
+        iconImg.alt = "";
+        li.appendChild(iconImg);
+      }
+
       const body = document.createElement("div");
       body.className = "unlock-item-body";
 
@@ -1082,6 +1140,15 @@
     els.inspTab.textContent = r.tab;
     els.inspName.textContent = r.name;
     els.inspKey.textContent = r.key;
+    if (els.inspIconImg) {
+      const iconUrl = getResearchIconDataUrl(r);
+      if (iconUrl) {
+        els.inspIconImg.src = iconUrl;
+        els.inspIconImg.hidden = false;
+      } else {
+        els.inspIconImg.hidden = true;
+      }
+    }
     els.btnMakeTarget.disabled = r.key === targetKey;
     els.btnMakeTarget.textContent =
       r.key === targetKey ? "Current target" : "Set as root target";
@@ -1201,10 +1268,17 @@
           : p.type === "Ph"
           ? "Hidden prerequisite (different tab or non-obvious link)"
           : "Standard prerequisite (same tab)";
+        const pIconUrl = pr ? getResearchIconDataUrl(pr) : null;
+        const pIconHtml = pIconUrl
+          ? `<img class="rel-item-icon" src="${pIconUrl}" alt="">`
+          : "";
         li.innerHTML = `
-          <div class="rel-item-main">
-            <span class="rel-item-name">${pr ? pr.name : p.key}</span>
-            <span class="rel-item-sub">${pr ? pr.tab : ""} · ${p.key}</span>
+          <div class="rel-item-left">
+            ${pIconHtml}
+            <div class="rel-item-main">
+              <span class="rel-item-name">${pr ? pr.name : p.key}</span>
+              <span class="rel-item-sub">${pr ? pr.tab : ""} · ${p.key}</span>
+            </div>
           </div>
           <span class="rel-badge ${badgeCls}" title="${badgeTitle}">${badgeText}</span>
         `;
@@ -1234,10 +1308,17 @@
         const li = document.createElement("li");
         li.className = "rel-item";
         const badgeCls = u.type === "Ph" ? "badge-ph" : "badge-p";
+        const uIconUrl = ur ? getResearchIconDataUrl(ur) : null;
+        const uIconHtml = uIconUrl
+          ? `<img class="rel-item-icon" src="${uIconUrl}" alt="">`
+          : "";
         li.innerHTML = `
-          <div class="rel-item-main">
-            <span class="rel-item-name">${ur ? ur.name : u.key}</span>
-            <span class="rel-item-sub">${ur ? ur.tab : ""} · ${u.key}</span>
+          <div class="rel-item-left">
+            ${uIconHtml}
+            <div class="rel-item-main">
+              <span class="rel-item-name">${ur ? ur.name : u.key}</span>
+              <span class="rel-item-sub">${ur ? ur.tab : ""} · ${u.key}</span>
+            </div>
           </div>
           <span class="rel-badge ${badgeCls}">${u.type}</span>
         `;
@@ -1591,11 +1672,29 @@
         ctx.fillText(wText, rightCursor + 4, ny + 15.5);
       }
 
-      // Research Name
+      // Research Icon & Name
+      const iconImg = getResearchIconImageEl(r);
+      let nameStartX = nx + 9;
+      let nameMaxW = NODE_W - 18;
+      if (iconImg && iconImg.complete && iconImg.naturalWidth > 0) {
+        drawRoundedRect(ctx, nx + 9, ny + 28, 24, 24, 4);
+        ctx.fillStyle = "rgba(11, 9, 20, 0.65)";
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+        ctx.stroke();
+        const prevSmooth = ctx.imageSmoothingEnabled;
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(iconImg, nx + 11, ny + 30, 20, 20);
+        ctx.imageSmoothingEnabled = prevSmooth;
+        nameStartX = nx + 38;
+        nameMaxW = NODE_W - 47;
+      }
+
       ctx.font = "700 11.5px Inter, sans-serif";
       ctx.fillStyle = "#f1effa";
-      const nameText = truncateCanvasText(ctx, r.name, NODE_W - 18);
-      ctx.fillText(nameText, nx + 9, ny + 41);
+      const nameText = truncateCanvasText(ctx, r.name, nameMaxW);
+      ctx.fillText(nameText, nameStartX, ny + 41);
 
       // Bottom bar: Key & Vis cost
       ctx.font = "500 9.5px monospace";
@@ -1819,6 +1918,792 @@
   }
 
   /* ==========================================================================
+   * Client-Side Mod JAR / Online Texture Extraction & IndexedDB Caching
+   * ========================================================================== */
+
+  const TEXTURE_IDB_NAME = "gtnh_thaumonomicon_textures_v1";
+  const TEXTURE_IDB_VERSION = 1;
+  const TEXTURE_META_STORAGE_KEY = "gtnh_thaumonomicon_tex_meta_v1";
+
+  // rawPngCache: lowercaseAssetPath -> data:image/png;base64,...
+  const rawPngCache = new Map();
+  // iconDataUrlCache: iconSignature -> data:image/png;base64,... (32x32 composited)
+  const iconDataUrlCache = new Map();
+  // iconImgElementCache: iconSignature -> HTMLImageElement
+  const iconImgElementCache = new Map();
+
+  let lastSelectedFiles = null;
+  let lastTextureSourceMode = null; // 'local' | 'github'
+  let isTextureJobRunning = false;
+
+  function getIconSignature(icon) {
+    if (!icon || !icon.path) return null;
+    return [
+      icon.path.toLowerCase(),
+      icon.tint || "",
+      (icon.overlay || "").toLowerCase(),
+      icon.overlay_tint || "",
+    ].join("|");
+  }
+
+  function getResearchIconDataUrl(r) {
+    if (!r || !r.icon) return null;
+    const sig = getIconSignature(r.icon);
+    return sig ? iconDataUrlCache.get(sig) || null : null;
+  }
+
+  function getResearchIconImageEl(r) {
+    if (!r || !r.icon) return null;
+    const sig = getIconSignature(r.icon);
+    return sig ? iconImgElementCache.get(sig) || null : null;
+  }
+
+  function registerCompositeIcon(sig, dataUrl) {
+    iconDataUrlCache.set(sig, dataUrl);
+    const img = new Image();
+    img.src = dataUrl;
+    iconImgElementCache.set(sig, img);
+  }
+
+  function openTextureDb() {
+    return new Promise((resolve, reject) => {
+      if (typeof indexedDB === "undefined") {
+        reject(new Error("IndexedDB unavailable"));
+        return;
+      }
+      const req = indexedDB.open(TEXTURE_IDB_NAME, TEXTURE_IDB_VERSION);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains("raw_pngs")) {
+          db.createObjectStore("raw_pngs");
+        }
+        if (!db.objectStoreNames.contains("icons")) {
+          db.createObjectStore("icons");
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error || new Error("Failed to open IndexedDB"));
+    });
+  }
+
+  async function loadCachedTexturesFromStorage() {
+    try {
+      const db = await openTextureDb();
+      await new Promise((resolve) => {
+        const tx = db.transaction(["raw_pngs", "icons"], "readonly");
+        const rawStore = tx.objectStore("raw_pngs");
+        const iconStore = tx.objectStore("icons");
+
+        const rawCursor = rawStore.openCursor();
+        rawCursor.onsuccess = (e) => {
+          const cursor = e.target.result;
+          if (cursor) {
+            rawPngCache.set(cursor.key, cursor.value);
+            cursor.continue();
+          }
+        };
+
+        const iconCursor = iconStore.openCursor();
+        iconCursor.onsuccess = (e) => {
+          const cursor = e.target.result;
+          if (cursor) {
+            registerCompositeIcon(cursor.key, cursor.value);
+            cursor.continue();
+          }
+        };
+
+        tx.oncomplete = () => {
+          db.close();
+          resolve();
+        };
+        tx.onerror = () => {
+          db.close();
+          resolve();
+        };
+      });
+    } catch (_) {
+      // Fallback to localStorage if IndexedDB is blocked
+      try {
+        const savedIcons = localStorage.getItem("gtnh_thaumonomicon_icons_fallback_v1");
+        if (savedIcons) {
+          const obj = JSON.parse(savedIcons);
+          for (const [k, v] of Object.entries(obj)) {
+            registerCompositeIcon(k, v);
+          }
+        }
+      } catch (_err) {}
+    }
+
+    try {
+      const metaStr = localStorage.getItem(TEXTURE_META_STORAGE_KEY);
+      if (metaStr) {
+        const meta = JSON.parse(metaStr);
+        if (meta && meta.lastSource) {
+          lastTextureSourceMode = meta.lastSource;
+        }
+      }
+    } catch (_) {}
+
+    updateTexturesStatusUI();
+  }
+
+  async function saveTexturesToStorage() {
+    try {
+      const db = await openTextureDb();
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction(["raw_pngs", "icons"], "readwrite");
+        const rawStore = tx.objectStore("raw_pngs");
+        const iconStore = tx.objectStore("icons");
+        for (const [k, v] of rawPngCache.entries()) {
+          rawStore.put(v, k);
+        }
+        for (const [k, v] of iconDataUrlCache.entries()) {
+          iconStore.put(v, k);
+        }
+        tx.oncomplete = () => {
+          db.close();
+          resolve();
+        };
+        tx.onerror = () => {
+          db.close();
+          reject(tx.error);
+        };
+      });
+    } catch (_) {
+      try {
+        const obj = {};
+        for (const [k, v] of iconDataUrlCache.entries()) {
+          obj[k] = v;
+        }
+        localStorage.setItem("gtnh_thaumonomicon_icons_fallback_v1", JSON.stringify(obj));
+      } catch (_err) {}
+    }
+
+    try {
+      const { resolvedResearches, totalResearches } = countResolvedResearchIcons();
+      localStorage.setItem(
+        TEXTURE_META_STORAGE_KEY,
+        JSON.stringify({
+          resolvedResearches,
+          totalResearches,
+          lastSource: lastTextureSourceMode,
+          updatedAt: new Date().toISOString(),
+        })
+      );
+    } catch (_) {}
+  }
+
+  async function clearCachedTextures() {
+    rawPngCache.clear();
+    iconDataUrlCache.clear();
+    iconImgElementCache.clear();
+    lastSelectedFiles = null;
+    lastTextureSourceMode = null;
+
+    try {
+      localStorage.removeItem(TEXTURE_META_STORAGE_KEY);
+      localStorage.removeItem("gtnh_thaumonomicon_icons_fallback_v1");
+    } catch (_) {}
+
+    try {
+      const db = await openTextureDb();
+      await new Promise((resolve) => {
+        const tx = db.transaction(["raw_pngs", "icons"], "readwrite");
+        tx.objectStore("raw_pngs").clear();
+        tx.objectStore("icons").clear();
+        tx.oncomplete = () => {
+          db.close();
+          resolve();
+        };
+        tx.onerror = () => {
+          db.close();
+          resolve();
+        };
+      });
+    } catch (_) {}
+
+    updateTexturesStatusUI("Cleared all cached textures from browser storage.");
+    refreshAllViewsWithIcons();
+  }
+
+  function countResolvedResearchIcons() {
+    let resolvedResearches = 0;
+    const totalResearches = allResearches.length;
+    for (const r of allResearches) {
+      if (getResearchIconDataUrl(r)) {
+        resolvedResearches++;
+      }
+    }
+    return { resolvedResearches, totalResearches };
+  }
+
+  function updateTexturesStatusUI(customDetailText) {
+    const { resolvedResearches, totalResearches } = countResolvedResearchIcons();
+
+    if (els.texturesCacheSummary) {
+      els.texturesCacheSummary.textContent = `${resolvedResearches.toLocaleString()} / ${totalResearches.toLocaleString()} research icons cached`;
+    }
+
+    if (els.texturesStatusDot && els.texturesBtnLabel && els.texturesCacheBadge) {
+      els.texturesStatusDot.classList.remove("partial", "loaded");
+      els.texturesCacheBadge.classList.remove("partial", "loaded");
+
+      if (resolvedResearches === 0) {
+        els.texturesBtnLabel.textContent = "Load textures";
+        els.texturesCacheBadge.textContent = "Not loaded";
+      } else if (resolvedResearches >= totalResearches) {
+        els.texturesStatusDot.classList.add("loaded");
+        els.texturesCacheBadge.classList.add("loaded");
+        els.texturesBtnLabel.textContent = "Textures (100%)";
+        els.texturesCacheBadge.textContent = "100% cached";
+      } else {
+        const pct = Math.round((resolvedResearches / Math.max(1, totalResearches)) * 100);
+        els.texturesStatusDot.classList.add("partial");
+        els.texturesCacheBadge.classList.add("partial");
+        els.texturesBtnLabel.textContent = `Textures (${pct}%)`;
+        els.texturesCacheBadge.textContent = `${pct}% cached`;
+      }
+    }
+
+    if (els.texturesStatusDetail) {
+      if (customDetailText) {
+        els.texturesStatusDetail.textContent = customDetailText;
+      } else if (resolvedResearches === 0) {
+        els.texturesStatusDetail.textContent =
+          "No textures are currently cached in browser storage. Choose a source below to load icons.";
+      } else if (resolvedResearches >= totalResearches) {
+        els.texturesStatusDetail.textContent =
+          "All 1,135 research icons are cached in browser storage and ready for offline use.";
+      } else {
+        els.texturesStatusDetail.textContent = `${resolvedResearches.toLocaleString()} icons cached in browser storage. Select a local GTNH mods/ directory to load any remaining closed-source mod icons.`;
+      }
+    }
+  }
+
+  function setTextureProgress(visible, fraction, detailText) {
+    if (els.texturesProgressTrack && els.texturesProgressFill) {
+      els.texturesProgressTrack.hidden = !visible;
+      const pct = Math.max(0, Math.min(100, Math.round((fraction || 0) * 100)));
+      els.texturesProgressFill.style.width = `${pct}%`;
+    }
+    if (detailText && els.texturesStatusDetail) {
+      els.texturesStatusDetail.textContent = detailText;
+    }
+  }
+
+  function collectAllNeededAssetPaths() {
+    // Returns Map<lowercasePath, { path: originalPath, jar: referenceJar }>
+    const needed = new Map();
+    const addEntry = (pathStr, jarStr) => {
+      if (!pathStr) return;
+      const key = pathStr.toLowerCase();
+      if (!needed.has(key)) {
+        needed.set(key, { path: pathStr, jar: jarStr || "" });
+      }
+    };
+    for (const r of allResearches) {
+      if (r.icon) {
+        addEntry(r.icon.path, r.icon.jar);
+        if (r.icon.overlay) {
+          addEntry(r.icon.overlay, r.icon.jar);
+        }
+      }
+    }
+    if (rawData && rawData.tab_icons) {
+      for (const ti of Object.values(rawData.tab_icons)) {
+        if (ti && ti.path) {
+          addEntry(ti.path, ti.jar);
+        }
+      }
+    }
+    return needed;
+  }
+
+  function uint8ToBase64DataUrl(bytes, mime = "image/png") {
+    let binary = "";
+    const chunkSize = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      const sub = bytes.subarray(i, i + chunkSize);
+      binary += String.fromCharCode.apply(null, sub);
+    }
+    return `data:${mime};base64,${btoa(binary)}`;
+  }
+
+  async function inflateRawBytes(compressedBytes) {
+    if (typeof DecompressionStream === "undefined") {
+      throw new Error("DecompressionStream API is required to read compressed JAR entries");
+    }
+    const ds = new DecompressionStream("deflate-raw");
+    const stream = new Blob([compressedBytes]).stream().pipeThrough(ds);
+    const ab = await new Response(stream).arrayBuffer();
+    return new Uint8Array(ab);
+  }
+
+  /**
+   * Scans a single ZIP/JAR Blob using only its End-of-Central-Directory (EOCD)
+   * and Central Directory slice, extracting only entries matching neededPaths
+   * (or nested mod JARs if scanning a modpack .zip archive).
+   */
+  async function extractMatchingEntriesFromZipBlob(blob, neededLowerSet, nestedJarPrefixes, depth = 0) {
+    const size = blob.size;
+    if (size < 22) return 0;
+
+    const tailLen = Math.min(size, 65558);
+    const tailBuf = await blob.slice(size - tailLen, size).arrayBuffer();
+    const tailView = new DataView(tailBuf);
+
+    let eocdPos = -1;
+    for (let p = tailLen - 22; p >= 0; p--) {
+      if (tailView.getUint32(p, true) === 0x06054b50) {
+        eocdPos = p;
+        break;
+      }
+    }
+    if (eocdPos < 0) return 0;
+
+    const cdSize = tailView.getUint32(eocdPos + 12, true);
+    const cdOffset = tailView.getUint32(eocdPos + 16, true);
+    if (cdOffset + cdSize > size) return 0;
+
+    const cdBuf = await blob.slice(cdOffset, cdOffset + cdSize).arrayBuffer();
+    const cdView = new DataView(cdBuf);
+    const decoder = new TextDecoder("utf-8");
+
+    const matchingEntries = [];
+    const nestedJars = [];
+    let ptr = 0;
+
+    while (ptr + 46 <= cdSize) {
+      if (cdView.getUint32(ptr, true) !== 0x02014b50) break;
+      const method = cdView.getUint16(ptr + 10, true);
+      const compSize = cdView.getUint32(ptr + 20, true);
+      const nameLen = cdView.getUint16(ptr + 28, true);
+      const extraLen = cdView.getUint16(ptr + 30, true);
+      const commentLen = cdView.getUint16(ptr + 32, true);
+      const localHeaderOffset = cdView.getUint32(ptr + 42, true);
+
+      if (ptr + 46 + nameLen > cdSize) break;
+      const rawName = decoder.decode(new Uint8Array(cdBuf, ptr + 46, nameLen));
+      const normLower = rawName.replace(/\\/g, "/").replace(/^\/+/, "").toLowerCase();
+
+      if (
+        (method === 0 || method === 8) &&
+        neededLowerSet.has(normLower) &&
+        !rawPngCache.has(normLower)
+      ) {
+        matchingEntries.push({ normLower, method, compSize, nameLen, localHeaderOffset });
+      } else if (
+        depth === 0 &&
+        (method === 0 || method === 8) &&
+        normLower.endsWith(".jar")
+      ) {
+        const baseJar = normLower.split("/").pop();
+        if (nestedJarPrefixes.some((pref) => baseJar.startsWith(pref))) {
+          nestedJars.push({ baseJar, method, compSize, nameLen, localHeaderOffset });
+        }
+      }
+
+      ptr += 46 + nameLen + extraLen + commentLen;
+    }
+
+    let extractedCount = 0;
+
+    const readEntryBytes = async (entry) => {
+      const readLen = 30 + entry.nameLen + 256 + entry.compSize;
+      const lfBuf = await blob
+        .slice(entry.localHeaderOffset, Math.min(size, entry.localHeaderOffset + readLen))
+        .arrayBuffer();
+      const lfView = new DataView(lfBuf);
+      if (lfView.getUint32(0, true) !== 0x04034b50) return null;
+      const lfNameLen = lfView.getUint16(26, true);
+      const lfExtraLen = lfView.getUint16(28, true);
+      const dataStart = 30 + lfNameLen + lfExtraLen;
+      if (dataStart + entry.compSize > lfBuf.byteLength) {
+        const exactBuf = await blob
+          .slice(
+            entry.localHeaderOffset + dataStart,
+            entry.localHeaderOffset + dataStart + entry.compSize
+          )
+          .arrayBuffer();
+        const compBytes = new Uint8Array(exactBuf);
+        return entry.method === 0 ? compBytes : await inflateRawBytes(compBytes);
+      }
+      const compBytes = new Uint8Array(lfBuf, dataStart, entry.compSize);
+      return entry.method === 0 ? compBytes : await inflateRawBytes(compBytes);
+    };
+
+    for (const entry of matchingEntries) {
+      try {
+        const rawBytes = await readEntryBytes(entry);
+        if (rawBytes && rawBytes.length > 0) {
+          rawPngCache.set(entry.normLower, uint8ToBase64DataUrl(rawBytes, "image/png"));
+          extractedCount++;
+        }
+      } catch (_) {}
+    }
+
+    // If the user selected a modpack .zip that contains nested mods/*.jar, scan those too
+    for (const nested of nestedJars) {
+      if (rawPngCache.size >= neededLowerSet.size) break;
+      try {
+        const jarBytes = await readEntryBytes(nested);
+        if (jarBytes && jarBytes.length > 22) {
+          const nestedBlob = new Blob([jarBytes]);
+          extractedCount += await extractMatchingEntriesFromZipBlob(
+            nestedBlob,
+            neededLowerSet,
+            nestedJarPrefixes,
+            depth + 1
+          );
+        }
+      } catch (_) {}
+    }
+
+    return extractedCount;
+  }
+
+  function loadImageFromDataUrl(dataUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = (e) => reject(e);
+      img.src = dataUrl;
+    });
+  }
+
+  function parseHexRgb(hexStr) {
+    if (!hexStr) return null;
+    const clean = hexStr.replace(/^#/, "").trim();
+    if (clean.length !== 6) return null;
+    const num = parseInt(clean, 16);
+    if (Number.isNaN(num)) return null;
+    return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+  }
+
+  function drawLayerToCanvas32(targetCtx, img, tintHex) {
+    const srcW = Math.max(1, img.naturalWidth || img.width || 16);
+    const srcH = Math.max(1, img.naturalHeight || img.height || 16);
+    // Minecraft animated textures are vertical strips (height is a multiple of width); crop frame 0
+    const cropW = srcW;
+    const cropH = srcH > srcW && srcH % srcW === 0 ? srcW : srcH;
+
+    const rgb = parseHexRgb(tintHex);
+    if (!rgb) {
+      targetCtx.imageSmoothingEnabled = false;
+      targetCtx.drawImage(img, 0, 0, cropW, cropH, 0, 0, 32, 32);
+      return;
+    }
+
+    // Apply OpenGL GL_MODULATE per-pixel RGB tint multiplication
+    const tmpCanvas = document.createElement("canvas");
+    tmpCanvas.width = 32;
+    tmpCanvas.height = 32;
+    const tmpCtx = tmpCanvas.getContext("2d");
+    tmpCtx.imageSmoothingEnabled = false;
+    tmpCtx.drawImage(img, 0, 0, cropW, cropH, 0, 0, 32, 32);
+
+    const imgData = tmpCtx.getImageData(0, 0, 32, 32);
+    const data = imgData.data;
+    const [tr, tg, tb] = rgb;
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i + 3] > 0) {
+        data[i] = Math.round((data[i] * tr) / 255);
+        data[i + 1] = Math.round((data[i + 1] * tg) / 255);
+        data[i + 2] = Math.round((data[i + 2] * tb) / 255);
+      }
+    }
+    tmpCtx.putImageData(imgData, 0, 0);
+    targetCtx.drawImage(tmpCanvas, 0, 0);
+  }
+
+  async function rebuildCompositeIconsFromRawPngs() {
+    const uniqueIcons = new Map();
+    for (const r of allResearches) {
+      if (r.icon && r.icon.path) {
+        const sig = getIconSignature(r.icon);
+        if (sig && !uniqueIcons.has(sig)) {
+          uniqueIcons.set(sig, r.icon);
+        }
+      }
+    }
+    if (rawData && rawData.tab_icons) {
+      for (const ti of Object.values(rawData.tab_icons)) {
+        if (ti && ti.path) {
+          const sig = getIconSignature(ti);
+          if (sig && !uniqueIcons.has(sig)) {
+            uniqueIcons.set(sig, ti);
+          }
+        }
+      }
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext("2d");
+
+    for (const [sig, icon] of uniqueIcons.entries()) {
+      const baseKey = icon.path.toLowerCase();
+      if (!rawPngCache.has(baseKey)) continue;
+      if (icon.overlay && !rawPngCache.has(icon.overlay.toLowerCase())) {
+        // Still allow rendering base if overlay is missing, or composite overlay if present
+      }
+      try {
+        const baseImg = await loadImageFromDataUrl(rawPngCache.get(baseKey));
+        ctx.clearRect(0, 0, 32, 32);
+        drawLayerToCanvas32(ctx, baseImg, icon.tint);
+
+        if (icon.overlay) {
+          const overKey = icon.overlay.toLowerCase();
+          if (rawPngCache.has(overKey)) {
+            const overImg = await loadImageFromDataUrl(rawPngCache.get(overKey));
+            drawLayerToCanvas32(ctx, overImg, icon.overlay_tint);
+          }
+        }
+
+        const finalDataUrl = canvas.toDataURL("image/png");
+        registerCompositeIcon(sig, finalDataUrl);
+      } catch (_) {}
+    }
+  }
+
+  async function fetchMissingTexturesFromGitHub(onlyMissing = true) {
+    if (!rawData || !rawData.github_bases) return 0;
+    const neededMap = collectAllNeededAssetPaths();
+    const ghBases = rawData.github_bases;
+
+    const tasks = [];
+    for (const [lowerPath, info] of neededMap.entries()) {
+      if (onlyMissing && rawPngCache.has(lowerPath)) continue;
+      const baseUrl = ghBases[info.jar];
+      if (!baseUrl) continue;
+      tasks.push({
+        lowerPath,
+        url: `${baseUrl}/${info.path}`,
+      });
+    }
+
+    if (tasks.length === 0) return 0;
+
+    let completed = 0;
+    let fetched = 0;
+    const total = tasks.length;
+    const CONCURRENCY = 12;
+    let idx = 0;
+
+    const worker = async () => {
+      while (idx < total) {
+        const cur = tasks[idx++];
+        try {
+          const resp = await fetch(cur.url);
+          if (resp.ok) {
+            const ab = await resp.arrayBuffer();
+            const bytes = new Uint8Array(ab);
+            if (bytes.length > 0) {
+              rawPngCache.set(cur.lowerPath, uint8ToBase64DataUrl(bytes, "image/png"));
+              fetched++;
+            }
+          }
+        } catch (_) {}
+        completed++;
+        if (completed % 5 === 0 || completed === total) {
+          setTextureProgress(
+            true,
+            completed / total,
+            `Fetching open-source textures from GitHub (${completed} / ${total})…`
+          );
+        }
+      }
+    };
+
+    const workers = [];
+    for (let w = 0; w < Math.min(CONCURRENCY, total); w++) {
+      workers.push(worker());
+    }
+    await Promise.all(workers);
+    return fetched;
+  }
+
+  async function processSelectedFilesForTextures(fileList) {
+    if (!fileList || fileList.length === 0 || isTextureJobRunning) return;
+    isTextureJobRunning = true;
+    lastSelectedFiles = Array.from(fileList);
+    lastTextureSourceMode = "local";
+
+    try {
+      const neededMap = collectAllNeededAssetPaths();
+      const neededLowerSet = new Set(neededMap.keys());
+
+      // Collect known JAR filename prefixes (lowercase, first 8 chars) to prioritize relevant mod JARs
+      const knownJarPrefixes = [];
+      const seenPref = new Set();
+      for (const info of neededMap.values()) {
+        if (info.jar) {
+          const pref = info.jar.toLowerCase().slice(0, 7);
+          if (pref && !seenPref.has(pref)) {
+            seenPref.add(pref);
+            knownJarPrefixes.push(pref);
+          }
+        }
+      }
+
+      const directPngFiles = [];
+      const priorityArchives = [];
+      const otherArchives = [];
+
+      for (const file of lastSelectedFiles) {
+        const nameLower = (file.name || "").toLowerCase();
+        const relPath = (file.webkitRelativePath || file.name || "")
+          .replace(/\\/g, "/")
+          .toLowerCase();
+
+        if (nameLower.endsWith(".png")) {
+          const assetsIdx = relPath.indexOf("assets/");
+          if (assetsIdx >= 0) {
+            const subPath = relPath.slice(assetsIdx);
+            if (neededLowerSet.has(subPath)) {
+              directPngFiles.push({ file, subPath });
+            }
+          }
+        } else if (nameLower.endsWith(".jar") || nameLower.endsWith(".zip")) {
+          if (knownJarPrefixes.some((p) => nameLower.startsWith(p))) {
+            priorityArchives.push(file);
+          } else {
+            otherArchives.push(file);
+          }
+        }
+      }
+
+      const archivesToScan = [...priorityArchives, ...otherArchives];
+      const totalItems = directPngFiles.length + archivesToScan.length;
+
+      if (totalItems === 0) {
+        updateTexturesStatusUI(
+          "No .jar, .zip, or assets/ .png files found in selection. Please select your GTNH mods/ folder."
+        );
+        return;
+      }
+
+      let processed = 0;
+      let newlyExtracted = 0;
+
+      setTextureProgress(true, 0.02, `Scanning ${totalItems} local files…`);
+
+      for (const item of directPngFiles) {
+        try {
+          const ab = await item.file.arrayBuffer();
+          rawPngCache.set(item.subPath, uint8ToBase64DataUrl(new Uint8Array(ab), "image/png"));
+          newlyExtracted++;
+        } catch (_) {}
+        processed++;
+      }
+
+      for (const jarFile of archivesToScan) {
+        if (rawPngCache.size >= neededLowerSet.size) break;
+        processed++;
+        if (processed % 3 === 0 || processed === totalItems) {
+          setTextureProgress(
+            true,
+            processed / totalItems,
+            `Scanning ${jarFile.name} (${rawPngCache.size} / ${neededLowerSet.size} textures found)…`
+          );
+        }
+        newlyExtracted += await extractMatchingEntriesFromZipBlob(
+          jarFile,
+          neededLowerSet,
+          knownJarPrefixes
+        );
+      }
+
+      // Optionally fetch missing vanilla 1.7.10 or open-source icons from GitHub
+      if (
+        els.checkFetchMissingOnline &&
+        els.checkFetchMissingOnline.checked &&
+        rawPngCache.size < neededLowerSet.size
+      ) {
+        newlyExtracted += await fetchMissingTexturesFromGitHub(true);
+      }
+
+      setTextureProgress(true, 0.95, "Compositing icons and caching in browser storage…");
+      await rebuildCompositeIconsFromRawPngs();
+      await saveTexturesToStorage();
+
+      setTextureProgress(false, 1.0);
+      const { resolvedResearches, totalResearches } = countResolvedResearchIcons();
+      updateTexturesStatusUI(
+        `Extracted ${newlyExtracted} new textures. ${resolvedResearches.toLocaleString()} / ${totalResearches.toLocaleString()} research icons are now cached in browser storage.`
+      );
+      refreshAllViewsWithIcons();
+    } catch (err) {
+      console.error("Texture extraction error:", err);
+      setTextureProgress(false, 0);
+      updateTexturesStatusUI(`Error extracting textures: ${err.message || err}`);
+    } finally {
+      isTextureJobRunning = false;
+    }
+  }
+
+  async function handleFetchGitHubTexturesClick() {
+    if (isTextureJobRunning) return;
+    isTextureJobRunning = true;
+    lastTextureSourceMode = "github";
+    try {
+      setTextureProgress(true, 0.02, "Connecting to GitHub raw asset repositories…");
+      const fetched = await fetchMissingTexturesFromGitHub(true);
+      setTextureProgress(true, 0.95, "Compositing icons and caching in browser storage…");
+      await rebuildCompositeIconsFromRawPngs();
+      await saveTexturesToStorage();
+      setTextureProgress(false, 1.0);
+      const { resolvedResearches, totalResearches } = countResolvedResearchIcons();
+      updateTexturesStatusUI(
+        `Fetched ${fetched} open-source textures from GitHub. ${resolvedResearches.toLocaleString()} / ${totalResearches.toLocaleString()} research icons cached.`
+      );
+      refreshAllViewsWithIcons();
+    } catch (err) {
+      console.error("GitHub texture fetch error:", err);
+      setTextureProgress(false, 0);
+      updateTexturesStatusUI(`Error fetching textures: ${err.message || err}`);
+    } finally {
+      isTextureJobRunning = false;
+    }
+  }
+
+  async function handleReloadTexturesClick() {
+    if (isTextureJobRunning) return;
+    if (lastSelectedFiles && lastSelectedFiles.length > 0) {
+      rawPngCache.clear();
+      iconDataUrlCache.clear();
+      iconImgElementCache.clear();
+      await processSelectedFilesForTextures(lastSelectedFiles);
+      return;
+    }
+    if (lastTextureSourceMode === "github" || rawPngCache.size === 0) {
+      await handleFetchGitHubTexturesClick();
+      return;
+    }
+    isTextureJobRunning = true;
+    try {
+      setTextureProgress(true, 0.5, "Re-compositing cached textures…");
+      await rebuildCompositeIconsFromRawPngs();
+      await saveTexturesToStorage();
+      setTextureProgress(false, 1.0);
+      updateTexturesStatusUI("Reloaded and re-composited all cached textures.");
+      refreshAllViewsWithIcons();
+    } finally {
+      isTextureJobRunning = false;
+    }
+  }
+
+  function refreshAllViewsWithIcons() {
+    populateTabsAndPresets();
+    renderSubgraph();
+    renderInspector(selectedKey);
+    if (els.searchDropdown && !els.searchDropdown.hidden) {
+      performSearch(els.searchInput.value);
+    }
+  }
+
+  /* ==========================================================================
    * Search & Filtering UI
    * ========================================================================== */
 
@@ -1879,9 +2764,16 @@
         const dispPrereqs = r.is_kami_bundle
           ? r.kami_prereq_count || r.parents.length
           : getEffectiveParents(r, r.key).length;
+        const sIconUrl = getResearchIconDataUrl(r);
+        const sIconHtml = sIconUrl
+          ? `<img class="search-option-icon" src="${sIconUrl}" alt="">`
+          : "";
         li.innerHTML = `
           <div class="search-option-top">
-            <span class="search-option-name">${r.name}</span>
+            <span style="display:inline-flex;align-items:center;gap:0.4rem;min-width:0;">
+              ${sIconHtml}
+              <span class="search-option-name">${r.name}</span>
+            </span>
             <span class="search-option-tab">${r.tab}</span>
           </div>
           <div class="search-option-sub">${r.key} · ${dispPrereqs} prereqs · ${dispVis.toLocaleString()} vis</div>
@@ -2022,6 +2914,94 @@
       });
     }
 
+    // Textures Dialog Events
+    const openTexturesDialog = () => {
+      if (!els.texturesDialog) return;
+      updateTexturesStatusUI();
+      if (typeof els.texturesDialog.showModal === "function") {
+        if (!els.texturesDialog.open) els.texturesDialog.showModal();
+      } else {
+        els.texturesDialog.setAttribute("open", "");
+      }
+    };
+
+    const closeTexturesDialog = () => {
+      if (!els.texturesDialog) return;
+      if (typeof els.texturesDialog.close === "function") {
+        if (els.texturesDialog.open) els.texturesDialog.close();
+      } else {
+        els.texturesDialog.removeAttribute("open");
+      }
+    };
+
+    if (els.btnOpenTextures) {
+      els.btnOpenTextures.addEventListener("click", openTexturesDialog);
+    }
+    if (els.btnCloseTextures) {
+      els.btnCloseTextures.addEventListener("click", closeTexturesDialog);
+    }
+    if (els.btnDismissTextures) {
+      els.btnDismissTextures.addEventListener("click", closeTexturesDialog);
+    }
+    if (els.texturesDialog) {
+      els.texturesDialog.addEventListener("click", (e) => {
+        if (e.target === els.texturesDialog) {
+          closeTexturesDialog();
+        }
+      });
+    }
+
+    if (els.btnPickModsDir && els.inputModsDir) {
+      els.btnPickModsDir.addEventListener("click", () => {
+        els.inputModsDir.value = "";
+        els.inputModsDir.click();
+      });
+      els.inputModsDir.addEventListener("change", () => {
+        if (els.inputModsDir.files && els.inputModsDir.files.length > 0) {
+          processSelectedFilesForTextures(els.inputModsDir.files);
+        }
+      });
+    }
+
+    if (els.btnPickJarFiles && els.inputJarFiles) {
+      els.btnPickJarFiles.addEventListener("click", () => {
+        els.inputJarFiles.value = "";
+        els.inputJarFiles.click();
+      });
+      els.inputJarFiles.addEventListener("change", () => {
+        if (els.inputJarFiles.files && els.inputJarFiles.files.length > 0) {
+          processSelectedFilesForTextures(els.inputJarFiles.files);
+        }
+      });
+    }
+
+    if (els.texturesDropzone) {
+      els.texturesDropzone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        els.texturesDropzone.classList.add("drag-over");
+      });
+      els.texturesDropzone.addEventListener("dragleave", () => {
+        els.texturesDropzone.classList.remove("drag-over");
+      });
+      els.texturesDropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        els.texturesDropzone.classList.remove("drag-over");
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          processSelectedFilesForTextures(e.dataTransfer.files);
+        }
+      });
+    }
+
+    if (els.btnFetchGithubTextures) {
+      els.btnFetchGithubTextures.addEventListener("click", handleFetchGitHubTexturesClick);
+    }
+    if (els.btnReloadTextures) {
+      els.btnReloadTextures.addEventListener("click", handleReloadTexturesClick);
+    }
+    if (els.btnClearTextures) {
+      els.btnClearTextures.addEventListener("click", clearCachedTextures);
+    }
+
     document.addEventListener("keydown", (e) => {
       const tag = (e.target && e.target.tagName) || "";
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
@@ -2091,6 +3071,7 @@
     loadCompletedState();
     applySidebarLayout();
     await initData();
+    await loadCachedTexturesFromStorage();
     populateTabsAndPresets();
     setupCanvasInteractions();
     setupSidebarResizing();

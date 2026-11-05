@@ -25,6 +25,10 @@
     <nav class="header-nav" aria-label="Application navigation">
       <a href="https://wiki.gtnewhorizons.com/wiki/Thaumonomicon#Research_Cheatsheet" target="_blank" rel="noopener" class="nav-link">Wiki cheatsheet ↗</a>
       <a href="https://github.com/mgomezch/gtnh-thaumonomicon" target="_blank" rel="noopener" class="nav-link">GitHub ↗</a>
+      <button type="button" id="btn-open-textures" class="nav-link textures-nav-btn" title="Load in-game research icons from local mod JARs or online sources">
+        <span class="textures-dot" id="textures-status-dot" aria-hidden="true"></span>
+        <span id="textures-btn-label">Load textures</span>
+      </button>
       <button type="button" id="btn-open-about" class="about-icon-btn" title="About &amp; attribution (?)" aria-label="About and attribution">?</button>
     </nav>
   </header>
@@ -201,7 +205,10 @@
           </div>
         </div>
 
-        <h2 class="insp-title" id="insp-name">Select a research</h2>
+        <div class="insp-title-row">
+          <img id="insp-icon-img" class="insp-icon-img" alt="" hidden>
+          <h2 class="insp-title" id="insp-name">Select a research</h2>
+        </div>
         <div class="insp-key-row">
           <code id="insp-key">KEY</code>
           <button type="button" id="btn-copy-key" class="icon-btn-sm" title="Copy research key">Copy</button>
@@ -278,6 +285,80 @@
       <span>📖 Inspector</span>
     </button>
   </nav>
+
+  <!-- Client-side Mod JAR / Online Texture Loader Dialog -->
+  <dialog id="textures-dialog" class="about-dialog textures-dialog" aria-labelledby="textures-dialog-title">
+    <div class="about-dialog-card textures-dialog-card">
+      <div class="about-dialog-header">
+        <div class="about-dialog-title-wrap">
+          <div class="brand-icon about-brand-icon" aria-hidden="true">
+            <img src="favicon.png" alt="" class="brand-book-img">
+          </div>
+          <h2 id="textures-dialog-title">Load in-game research textures</h2>
+        </div>
+        <button type="button" id="btn-close-textures" class="about-close-btn" title="Close dialog (Esc)" aria-label="Close dialog">×</button>
+      </div>
+      <div class="about-dialog-body textures-dialog-body">
+        <p class="textures-intro">
+          Because several Minecraft 1.7.10 mods (such as base <em>Thaumcraft 4</em>, <em>Automagy</em>, and <em>Witchery</em>) use all-rights-reserved licenses, this web app does not bundle or redistribute their texture assets.
+          Instead, you can extract icons <strong>100% locally in your browser</strong> from your own GTNH <code>mods/</code> folder or fetch open-source addon textures from GitHub, and cache them in browser storage.
+        </p>
+
+        <!-- Current Cache Status Banner -->
+        <div class="textures-status-card" id="textures-status-card">
+          <div class="textures-status-row">
+            <span class="textures-status-title" id="textures-cache-summary">0 / 1,135 research icons cached</span>
+            <span class="textures-status-badge" id="textures-cache-badge">Not loaded</span>
+          </div>
+          <div class="textures-progress-track" id="textures-progress-track" hidden>
+            <div class="textures-progress-fill" id="textures-progress-fill" style="width: 0%;"></div>
+          </div>
+          <p class="textures-status-detail" id="textures-status-detail">
+            No textures are currently cached in browser storage. Choose a source below to load icons.
+          </p>
+        </div>
+
+        <!-- Option 1: Local mods/ directory or JAR files -->
+        <div class="textures-source-box" id="textures-dropzone">
+          <h3>Option 1: Extract from local GTNH <code>mods/</code> directory (100% coverage)</h3>
+          <p>
+            Point your browser at your GTNH instance's <code>.minecraft/mods</code> folder (or drag and drop <code>.jar</code> files here).
+            Files are read locally in memory and never uploaded anywhere.
+          </p>
+          <div class="textures-action-row">
+            <button type="button" id="btn-pick-mods-dir" class="btn-primary-sm">Select mods/ folder…</button>
+            <button type="button" id="btn-pick-jar-files" class="ctrl-btn">Select .jar / .zip files…</button>
+            <input type="file" id="input-mods-dir" webkitdirectory directory multiple hidden>
+            <input type="file" id="input-jar-files" accept=".jar,.zip,.png" multiple hidden>
+          </div>
+          <label class="kami-toggle-row textures-fallback-check" for="check-fetch-missing-online">
+            <input type="checkbox" id="check-fetch-missing-online" checked>
+            <span>Also fetch vanilla 1.7.10 &amp; open-source GTNH icons online if not found in selected folder</span>
+          </label>
+        </div>
+
+        <!-- Option 2: Online GitHub repositories -->
+        <div class="textures-source-box">
+          <h3>Option 2: Fetch open-source GTNH textures from GitHub (~72% coverage)</h3>
+          <p>
+            Don't have GTNH installed on this device? Fetch textures directly from official open-source
+            <a href="https://github.com/GTNewHorizons" target="_blank" rel="noopener">GTNewHorizons</a> GitHub repositories
+            (covers GTNH addons, GregTech, Forbidden Magic, Gadomancy, Thaumic Tinkerer, Witching Gadgets, etc.).
+          </p>
+          <div class="textures-action-row">
+            <button type="button" id="btn-fetch-github-textures" class="ctrl-btn">Fetch online textures from GitHub</button>
+          </div>
+        </div>
+      </div>
+      <div class="about-dialog-footer textures-dialog-footer">
+        <div class="textures-footer-left">
+          <button type="button" id="btn-reload-textures" class="text-btn" title="Re-process or re-fetch cached icons">↻ Reload textures</button>
+          <button type="button" id="btn-clear-textures" class="text-btn danger-text-btn" title="Delete all cached textures from browser storage">Clear cached textures</button>
+        </div>
+        <button type="button" id="btn-dismiss-textures" class="btn-primary-sm">Done</button>
+      </div>
+    </div>
+  </dialog>
 
   <!-- About & Attribution Floating Dialog -->
   <dialog id="about-dialog" class="about-dialog" aria-labelledby="about-dialog-title">
